@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <title>Service for Microstrategy</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pantry.css" rel="stylesheet">
+    <link href="css/food_detail.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/shoppingCart.js"></script>
+    
+    <!-- app start -->
+    <script type="text/javascript">
+    $(function(){
+        App = window.App || {};
+        App.Router = Backbone.Router.extend({
+            routes: {
+                ''                      : 'listCart',
+                'shoppingCart'          : 'listCart',
+            },
+
+            listCart: function(query) {
+                var shoppingCartItems = new App.Collection.ShoppingCartItemCollection();
+                var shoppingCart = new App.View.ShoppingCart({model: shoppingCartItems, el: $('#main')});
+                shoppingCart.render();
+            }
+        });
+
+        var router = new App.Router();
+        Backbone.history.start();
+    });
+    </script>
+</head>
+
+<body style="padding-top: 90px">
+
+<div id="nav">
+</div>
+
+<div class="container" id="main">
+</div>
+
+</body>
+</html>

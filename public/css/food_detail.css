@@ -1,0 +1,21 @@
+.detail_title {
+	color:#CE0000;
+}
+
+.detail_desc {
+	color:#8C7E7E;
+	font-size:13px;
+}
+
+.detail_lebal {
+	float:left;
+	margin-right:5px;
+	font-size:14px;
+}
+
+.detail_input {
+	width:30px;
+	float:left;
+}
+
+

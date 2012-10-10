@@ -1,0 +1,283 @@
+.columnright {
+    top:10px;
+    left:10px;
+    width: 765px;
+    float:right;
+}
+
+.ul_tab {
+    border-bottom: 2px solid #CC0000;
+    display: block;
+    height: 28px;
+    padding-top: 2px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.ul_tab li {
+    background-position: 100% -32px;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 28px;
+    line-height: 26px;
+    margin-right: 5px;
+    padding: 0 30px 0 0;
+    position: relative;
+    text-align: center;
+    top: 2px;
+}
+
+.ul_tab li, .ul_tab .on, .ul_tab s {
+    background-image: url("../images/tab_bg.png");
+    background-repeat: no-repeat;
+}
+
+.ul_tab li s {
+    background-position: 0 -32px;
+    display: inline-block;
+    float: left;
+    height: 28px;
+    margin-right: 24px;
+    width: 6px;
+}
+
+.ul_tab .on {
+    background-position: 100% 0;
+    color: #333333;
+    font-weight: bold;
+}
+.ul_tab .on s {
+    background-position: 0 0;
+}
+
+.ul_tab li, .ul_tab .on, .ul_tab s {
+    background-image: url("../images/tab_bg.png");
+    background-repeat: no-repeat;
+}
+
+.ul_tab cite {
+    display: inline-block;
+    font-style: normal;
+    text-indent: 3px;
+}
+
+cite, small {
+    margin: 0;
+    padding: 0;
+}
+
+.or_box {
+    background: url("../images/orderlist_bg.png") repeat-y scroll left center transparent;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 10px;
+}
+
+.order_dr {
+    color: #666666;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.or_info, div.or_list {
+    float: left;
+}
+
+.or_info {
+    color: #999999;
+    line-height: 22px;
+    padding: 0 0 0 10px;
+    width: 178px;
+}
+
+.order_dr p {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.order_dr p span {
+    color: #999999;
+    display: inline-block;
+}
+
+.order_dr a {
+    color: #0066CC;
+}
+
+.or_info, div.or_list {
+    float: left;
+}
+
+.or_list {
+    width: 572px;
+}
+
+.or_listrf dt {
+    border-top: 1px solid #DFDFDF;
+    height: 16px;
+    line-height: 17px;
+    margin-right: -1px;
+    margin-top: -2px;
+    padding: 7px 0;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+
+.or_list dt {
+    background: none repeat scroll 0 0 #FFFDE6;
+    border-bottom: 1px solid #DFDFDF;
+    border-left: 1px solid #DFDFDF;
+    bottom: -1px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 1em;
+    position: relative;
+}
+
+a.hblue {
+    color: #0066CC;
+}
+
+.or_listrf dt cite {
+    font-weight: bold;
+    margin-left: 16px;
+    margin-right: 8px;
+}
+
+.or_listrf dt small {
+    color: #FF6600;
+    font-size: 12px;
+}
+
+.fr {
+    float: right;
+}
+
+.or_listrf dd .fr a {
+    color: #1A66B3;
+}
+
+.or_listrf em {
+    color: #CC0000;
+}
+
+em {
+    color: #990000;
+    font: bold 12px normal Verdana,Geneva,sans-serif;
+    margin: 0 3px;
+}
+
+.order_zs {
+    background: url("../images/bg_redbt.png") no-repeat scroll right 0 transparent;
+    color: #FFFFFF;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    padding-left: 10px;
+    text-align: center;
+    width: 70px;
+}
+
+.or_listrf dd {
+    margin: 0 10px;
+    padding: 12px 0;
+}
+
+.or_list dd {
+    border-top: 1px dotted #CCCCCC;
+    clear: both;
+    line-height: 21px;
+    margin: 0 15px;
+    overflow: hidden;
+    padding: 10px 0;
+    color:#666666;
+}
+
+ .or_list dd .fr a {
+    color: #1A66B3;
+}
+ .or_list dd a {
+    color: #666666;
+}
+
+.or_list em {
+    color: #CC0000;
+}
+
+#orders_container {
+  width: 980px;
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.columnleft {
+    background: url("http://image.yihaodianimg.com/member/member/images/user_bg_y.gif") repeat-y scroll right center transparent;
+    float: left;
+    padding-right: 4px !important;
+    width: 200px;
+    display: block;
+    float: left;
+}
+
+.columnleft dl {
+    background: url("http://image.yihaodianimg.com/member/member/images/user_bg_x.gif") repeat-x scroll 0 -268px transparent;
+    border-left: 1px solid #CCCCCC;
+    margin-bottom: -2px;
+}
+
+.columnleft dt {
+    background: url("http://image.yihaodianimg.com/member/member/images/user_bg.gif") no-repeat scroll -180px 7px transparent;
+    color: #333333;
+    font: bold 12px/32px Arial,Helvetica,sans-serif;
+    height: 32px;
+    padding-left: 28px;
+    border-bottom: 1px solid #CC0000;
+}
+
+.columnleft .current {
+    background-color: #FFEFD9;
+    color: #990000;
+    margin: 0;
+    padding: 0 8px;
+    font-weight: bold;
+}
+
+.columnleft dd {
+    background: url("http://image.yihaodianimg.com/member/member/images/user_bg_x.gif") repeat-x scroll 0 -71px transparent;
+    color: #333333;
+    font: 10px/30px '宋体';
+    margin: 0 8px;
+    text-indent: 2px;
+}
+
+#container .columnleft .current a {
+    color: #990000;
+    vertical-align: -1px;
+}
+
+#container .columnleft a {
+    color: #333333;
+    font-size: 12px;
+}
+
+#container .columnleft a {
+    color: #333333;
+    font-size: 12px;
+    margin-left: 6px;
+}
+
+#container a {
+    color: #1A66B3;
+}
+
+#myYihaodianLeftMenu img {
+    display: block;
+}
+img {
+    border: medium none;
+}
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>Service for Microstrategy</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pantry.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/date.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/frame.js"></script>
+    <script type="text/javascript" src="js/session.js"></script>
+    <script type="text/javascript" src="js/shoppingCart.js"></script>
+    <script type="text/javascript" src="js/order.js"></script>
+    
+    <!-- app start -->
+    <script type="text/javascript">
+    $(function(){
+        App = window.App || {};
+        App.Router = Backbone.Router.extend({
+            routes: {
+                'generateOrder' : 'generateOrder',
+                'listOrders' : 'listOrders',
+                'monthReport' : 'monthReport',
+                'dayReport' : 'dayReport'
+            },
+
+            generateOrder: function() {
+                $('#main').html(new App.View.OrderButtons().render().el);
+
+                var orders = App.shoppingCart.generateOrders();
+                for(var key in orders){
+                    var order = new App.Model.Order(orders[key]);
+                    order.save({receiver: 'jning'},{
+                        success: function(model, resp){
+                            $('#main').prepend(new App.View.Order({model: model}).render().el);
+                        },
+                        error: function(model, resp){
+                            $('#main').prepend('order failed: ' + order.get('shopName'));
+                            $('#main').prepend(resp.getResponseHeader('message'));
+                        }
+                    });
+                }
+
+                App.shoppingCart.empty();
+            },
+
+            listOrders: function() {
+                $('#main').html(new App.View.Frame({templateId: 'frame-top-middle-bottom'}).render().el);
+
+                var orderlist = new App.Collection.OrderCollection();
+                var start = Date.today().add({ days: -29 });
+                var end = Date.today();
+
+                var orderSelectorPanel = new App.View.OrderSelector({model: orderlist, el: $('#frame-top'), start: start, end: end});
+                var orderListPanel = new App.View.OrderList({model: orderlist, el: $('#frame-middle')});
+                orderSelectorPanel.render();
+                
+                orderlist.on('all', function(){
+                    orderListPanel.render();
+                });
+
+                orderSelectorPanel.query();               
+            },
+
+            monthReport: function() {
+                $('#main').html(new App.View.Frame({templateId: 'frame-top-middle-bottom'}).render().el);
+                
+                var orderlist = new App.Collection.OrderCollection();
+                var start = Date.today().add({ days: -29 });
+                var end = Date.today();
+
+                var orderSelectorPanel = new App.View.OrderSelector({model: orderlist, el: $('#frame-top'), start: start, end: end, admin:true});
+                var monthReportPanel = new App.View.MonthReport({model: orderlist, el: $('#frame-middle')});
+                orderSelectorPanel.render();
+
+                orderlist.on('all', function(){
+                    monthReportPanel.render();
+                });
+                
+                orderSelectorPanel.query();               
+            },
+
+            dayReport: function() {
+                $('#main').html(new App.View.Frame({templateId: 'frame-top-middle-bottom'}).render().el);
+                
+                var orderlist = new App.Collection.OrderCollection();
+                var start = Date.today().add({ days: -29 });
+                var end = Date.today();
+
+                var orderSelectorPanel = new App.View.OrderSelector({model: orderlist, el: $('#frame-top'), start: start, end: end, admin:true});
+                var dayReportPanel = new App.View.DayReport({model: orderlist, el: $('#frame-middle')});
+                orderSelectorPanel.render();
+
+                orderlist.on('all', function(){
+                    dayReportPanel.render();
+                });
+                
+                orderSelectorPanel.query(); 
+            }
+        });
+
+        var session = App.session = new App.Model.Session({userCookie: true});
+        session.save({auth: true}, {
+            success: function (model, response){
+                session = model;
+                var router = new App.Router();
+                Backbone.history.start();
+            },
+            error: function (model, response){
+                alert('login failed');
+            }
+        });
+    });
+    </script>
+</head>
+
+<body style="padding-top: 90px">
+
+<div class="container" id="main">
+
+</div>
+
+</body>
+</html>

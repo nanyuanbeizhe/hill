@@ -1,0 +1,13 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class="icon-list-alt"></i> Orders
+    <b class="caret"></b>
+</a>
+<ul class="dropdown-menu">
+	<% if(auth) { %>
+    <li><a href="#listOrders">History Orders</a></li>
+    <% if(roleCheck('admin', roles)) { %>
+    <li><a href="#monthReport">Report</a></li>
+    <li><a href="#dayReport">Food Count</a></li>
+    <% } %>
+    <% } %>
+</ul>

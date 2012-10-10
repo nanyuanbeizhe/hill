@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>Service for Microstrategy</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pantry.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/user.js"></script>
+    <script type="text/javascript" src="js/session.js"></script>
+    
+    <!-- app start -->
+    <script type="text/javascript">
+        $(function(){
+            App = window.App || {};
+            App.Router = Backbone.Router.extend({
+                routes: {
+                    'editPassword'  :   'editPassword',
+                    'editProfile'   :   'editProfile',
+                    'findPassword'  :   'findPassword',
+                    'register'      :   'register'
+                },
+
+                editPassword: function() {
+                    var me = new App.Model.User({_id: session.get('userId')});
+                    me.fetch({
+                        success: function(model, response){
+                            var password_panel = new App.View.PasswordEditor({model: me});
+                            $('#main').html(password_panel.render().el);
+                        }
+                    });                   
+                },
+
+                editProfile: function() {
+                    var me = new App.Model.User({_id: session.get('userId')});
+                    me.fetch({
+                        success: function(model, response){
+                            var panel = new App.View.ProfileEditor({model: me});
+                            $('#main').html(panel.render().el);
+                        }
+                    });                    
+                },
+
+                findPassword: function() {
+                    var panel = new App.View.PasswordResetor();
+                    $('#main').html(panel.render().el);
+                },
+
+                register: function() {
+                    var panel = new App.View.UserRegister();
+                    $('#main').html(panel.render().el);
+                }
+            });
+
+            var session = App.session = new App.Model.Session({userCookie: true});
+
+            session.save({num: 1}, {
+                success: function (model, response){
+                    session = model;
+                    var router = new App.Router();
+                    Backbone.history.start();
+                },
+                error: function (model, response){
+                    alert('login failed');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body style="padding-top: 90px;">
+
+<div class="container" id="main">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+.food {
+background-color: white;
+box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+border-radius: 0px;
+border: 0;
+font-size: 11px;
+padding-bottom: 0;
+}
+
+.shop {
+background-color: #F7F5F5;
+margin: 0 -3px;
+padding: 10px 15px;
+word-wrap: break-word;
+}
+
+.description {
+color: #8C7E7E;
+}
+
+.shoppingcart-item:hover {
+color: white;
+background: #6ED33C;
+}
+
+.sites a:link, .sites a:visited {
+background: transparent url("/img/sites.png") no-repeat;
+}
+
+.sites .weibo:link, .sites .weibo:visited {
+width: 110px;
+height: 71px;
+background-position: -222px 0;
+}
+
+.sites .qqsite:link, .sites .qqsite:visited {
+width: 106px;
+height: 71px;
+background-position: -334px 0;
+}
+
+.sites .qqweib:link, .sites .qqweib:visited {
+width: 110px;
+height: 69px;
+background-position: -222px -71px;
+}
+
+.sites .douban:link, .sites .douban:visited {
+width: 106px;
+height: 69px;
+background-position: -334px -71px;
+}
+.sites a:link, .sites a:visited {
+float: left;
+text-indent: -9999px;
+}
+
+.sites .weibo:hover{
+  background-position: 0 0;
+}
+.sites .qqsite:hover{
+  background-position: -112px 0;
+}
+.sites .qqweib:hover{
+  background-position: 0px -71px;
+}
+.sites .douban:hover{
+  background-position: -112px -71px;
+}
+
+.login .center {
+border-right: 1px solid #FBFBFB;
+border-bottom: 2px solid #FBFBFB;
+}
+
+.login .cont {
+padding-top: 8px;
+border: 1px solid #E5E5E5;
+}
+
+.clr {
+zoom: 1;
+}
+
+.login .bottom {
+height: 6px;
+background-position: -316px -202px;
+font-size: 1px;
+line-height: 1px;
+}
+
+.login .itop {
+height: 1px;
+background-position: -316px -186px;
+font-size: 1px;
+line-height: 1px;
+}
+
+.login .cont form {
+padding: 0 11px;
+overflow: hidden;
+}
+
+.modal-large {
+	width: 940px;
+	margin-left: -470px;
+}

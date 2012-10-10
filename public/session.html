@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>Service for Microstrategy</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/pantry.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/json2.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/underscore.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/backbone.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/session.js"></script>
+    
+    <!-- app start -->
+    <script type="text/javascript">
+    $(function(){
+        App = window.App || {};
+        App.Router = Backbone.Router.extend({
+
+            routes: {
+                ''          : 'showSessionPanel',
+                'logout' :   'logout'
+            },
+
+            showSessionPanel: function() {
+                var sv = new App.View.Login({model: session});
+                main.html(sv.render().el);
+            },
+
+            logout: function() {
+                var that = this;
+                this.navigate('');
+
+                session.destroy({
+                    success: function(model, resp) {
+                        session.clear();
+                    },
+                    error: function(model, resp) {
+                        console.log('error');
+                    }
+                });
+            }
+        });
+
+        var main = $('#main');
+        var session = new App.Model.Session();
+        session.on('change:auth', function(){
+            console.log('auth: ' + session.get('auth'));
+            main.toggle();
+            $(message).toggle();
+            if(session.get('auth')) $('#welcome').html(session.get('userName'));
+        });
+       
+        var router = new App.Router();
+        Backbone.history.start();
+    });
+    </script>
+</head>
+
+<body style="padding-top: 90px">
+
+<div class="container" id="main">
+</div>
+
+<div class="container" id="message" style="display:none">
+    <div class="hero-unit" >
+        <h1>欢迎你</h1>
+        <p id="welcome"></p>
+        <p><a href="#logout" class="btn btn-primary btn-large">退出</a></p>
+    </div>
+</div>
+
+</body>
+</html>

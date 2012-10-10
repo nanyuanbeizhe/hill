@@ -1,0 +1,19 @@
+<div class='page-header'>
+    <h1>Edit your profile</h1>
+    <p id="profile-editor-message"></p>
+</div>
+<form class="form-horizontal" id="profile-editor">
+    <div class="control-group">
+        <label class="control-label" for="input-name">Your name</label>
+        <div class="controls">
+            <input type="text" id="input-name" placeholder="中文名" name="name" value="<%= name %>">
+            <span class="help-block">建议使用中文名.</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary" id="btnSave">Save Your Change</button>
+            <button type="button" class="btn" id="btnCancel">Cancel</button>
+        </div>
+    </div>
+</form>

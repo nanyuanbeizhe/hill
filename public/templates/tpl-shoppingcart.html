@@ -1,0 +1,63 @@
+<script language="Javascript" type="text/javascript" src="js/jquery.lwtCountdown-1.0.js"></script>
+<link rel="Stylesheet" type="text/css" href="css/light.css"></link>
+
+<div class="modal modal-large">
+  <div class="modal-header">
+    <h3>My Lunch</h3>
+  </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="span3">Order system will be closed after:</div>
+            <!-- Countdown dashboard start -->
+            <div class="span6" id="countdown_dashboard">
+                <div class="dash hours_dash">
+                    <span class="dash_title">hours</span>
+                    <div class="digit">0</div>
+                    <div class="digit">0</div>
+                </div>
+
+                <div class="dash minutes_dash">
+                    <span class="dash_title">minutes</span>
+                    <div class="digit">0</div>
+                    <div class="digit">0</div>
+                </div>
+
+                <div class="dash seconds_dash">
+                    <span class="dash_title">seconds</span>
+                    <div class="digit">0</div>
+                    <div class="digit">0</div>
+                </div>
+
+            </div>
+            <!-- Countdown dashboard end -->
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>菜品</th>
+                    <th>供应商</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>折扣</th>
+                    <th>总金额</th>
+                </tr>
+            </thead>
+            <tbody id='items'>
+                <tr>
+                    <td>总计</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><%= formatNumber(totalCost,2,'.',',') %></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>支付方式：月付</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" id="btn-empty">Empty My Lunch</button>
+        <a href="#" class="btn">Order More</a>
+        <a href="#generateOrder" class="btn btn-primary" id="checkout">Check Out</a>
+    </div>
+</div>

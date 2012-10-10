@@ -1,0 +1,61 @@
+<% for(var i in reports) { %>
+<div class="well">
+    <div class="row">
+        <div class="span2">
+            <a href="#">
+                <img src="<%= reports[i].foodImageUrl %>" class="img-polaroid"></a>
+        </div>
+        <div class="span6">
+            <dl class="dl-horizontal">
+                <dt>名称</dt>
+                <dd><%= reports[i].foodName %></dd>
+                <dt>饭店</dt>
+                <dd><%= reports[i].foodShopName %></dd>
+                <dt>价格</dt>
+                <dd>￥<%= formatNumber(reports[i].foodPrice,2,'.',',') %></dd>
+                <dt>折扣</dt>
+                <dd><%= formatNumber(reports[i].foodDiscount,2,'.') %></dd>
+            </dl>
+            <div class="row" style="margin: 9px 0;">
+                <div class="btn-group pull-right">
+                    <button class="btn disabled">已订：<strong style="color: red; font-size: 20px"><%= reports[i].amount %></strong> 份</button>
+                    <button class="btn toggle-dayCount-detail" data-toggle="modal" data-target="#report-detail">展开明细</button>
+                    <button class="btn">确定下单</button>
+                    <button class="btn">全部取消</button>
+                </div>
+            </div>
+            <table class="table table-striped table-hover dayCount-detail" style="display:none">
+                <thead>
+                    <tr>
+                        <th>订餐人员</th>
+                        <th>订餐时间</th>
+                        <th>份数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% for(var k = reports[i].orders.length - 1; k >= 0; k--) { var d = reports[i].orders[k]; %>
+                    <tr>
+                        <td><%= d.userName %></td>
+                        <td><%= d.orderDate %></td>
+                        <td><%= d.count %></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% } %>
+
+<!-- Modal -->
+<div class="modal hide fade modal-large" id="report-detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">订单明细</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>

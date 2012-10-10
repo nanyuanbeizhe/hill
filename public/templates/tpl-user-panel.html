@@ -1,0 +1,23 @@
+<% if(auth) { %>
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+    <i class="icon-user"></i><%= userName %>
+    <b class="caret"></b>
+</a>
+<ul class="dropdown-menu">
+    <li><a href="#editProfile">Edit Profile</a></li>
+    <li><a href="#editPassword">Change Password</a></li>
+    <li><a href="#logout">Logout</a></li>
+</ul>
+
+<% } else { %>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+    <i class="icon-user"></i>未登录
+    <b class="caret"></b>
+</a>
+<ul class="dropdown-menu">
+    <li><a href="#login">Login</a></li>
+    <li><a href="#register">Register</a></li>
+    <li><a href="#findPassword">Find Password</a></li>
+</ul>
+<% } %>

@@ -1,0 +1,412 @@
+
+.bookmark h3 a {
+color: black;
+font-size: 16px;
+}
+
+.bookmark p {
+color: #777;
+font-size: 11px;
+}
+
+.bookmark {
+width: 500px;
+border-bottom: 1px solid #DDD;
+margin: 10px 0 0 0;
+padding: 0 0 12px 0;
+}
+
+.bookmark .options {
+float: right;
+font-size: 11px;
+color: #777;
+}
+
+#images {
+position: relative;
+}
+
+#page {
+position: relative;
+}
+
+.hometile {
+background-color: white;
+width: 236px;
+border: 1px solid #dedede;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+display: none;
+}
+
+.hometile #intro {
+border-bottom: 1px solid #dedede;
+padding: 10px 0 7px 10px;
+}
+
+.hometile #intro h1 {
+padding: 7px 0 10px 10px;
+margin-bottom: 10px;
+font-size: 22px;
+font-weight: normal;
+line-height: 26px;
+}
+
+.hometile #intro .options {
+color: #777;
+}
+
+.hometile #intro .options:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.hometile .welcome {
+padding: 14px 0 14px 21px;
+}
+
+.hometile .welcome h1 {
+margin: 0;
+font-size: 18px;
+font-weight: normal;
+line-height: 24px;
+}
+
+.hometile .actionButton {
+display: inline-block;
+line-height: 30px;
+margin: 0 0px 15px 10px;
+padding: 0 10px 0 10px;
+float: left;
+}
+
+.hometile .joinWithFB {
+clear: both;
+margin: 0;
+}
+
+.hometile .actionButton img {
+display: inline-block;
+vertical-align: middle;
+margin: 0 5px 3px 0;
+}
+
+.hometile .nav,
+.hometile .navigation {
+padding: 0 0 5px 0;
+width: 236px;
+}
+
+.hometile .nav h2,
+.hometile .navigation h2 {
+font-weight: 700;
+font-size: 14px;
+margin-bottom: 8px;
+color: #333;
+padding: 21px 5px 12px 18px;
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+}
+
+.hometile .nav li,
+.hometile .navigation li {
+border-top: 1px solid #ffffff;
+border-bottom: 1px solid #ffffff;
+}
+
+.hometile .nav li:last-child,
+.hometile .navigation li:last-child {
+border-bottom: 0px;
+}
+
+.hometile .nav li a,
+.hometile .navigation li a {
+display: block;
+padding: 10px 5px 10px 20px;
+font-size: 13px;
+color: #777;
+}
+
+.hometile .nav li a:hover,
+.hometile .navigation li a:hover {
+color: #008ed3;
+}
+.hometile .nav li:hover,
+.hometile .navigation li:hover {
+background-color: #f8f8f8;
+}
+.hometile .nav li.active a,
+.hometile .navigation li.active a {
+color: #000000;
+}
+
+.hometile .nav li.active,
+.hometile .navigation li.active {
+border-top: 1px solid #dedede;
+border-bottom: 1px solid #dedede;
+  background-color: #f8f8f8;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#eeeeee));
+  background-image: -webkit-linear-gradient(top, #f8f8f8, #eeeeee);
+  background-image: -moz-linear-gradient(top, #f8f8f8, #eeeeee);
+  background-image: -ms-linear-gradient(top, #f8f8f8, #eeeeee);
+  background-image: -o-linear-gradient(top, #f8f8f8, #eeeeee);
+  background-image: linear-gradient(top, #f8f8f8, #eeeeee);
+-moz-box-shadow: inset 0 1px 0 white;
+cursor: default;
+}
+
+.hometile .news {
+border-top: 1px solid #dedede;
+padding: 15px 18px 10px 18px;
+font-size: 11px;
+color: #666;
+background-color: #fafafa;
+margin-top: 10px;
+}
+
+.hometile .news h3 {
+font-size: 14px;
+margin-bottom: 10px;
+color: #333333;
+}
+
+.hometile .news li {
+padding: 5px 0 5px 0;
+float: left;
+width: 66px;
+text-align: center;
+}
+
+.hometile .news li img {
+margin-right: 5px;
+display: block;
+margin: 0 auto 4px auto;
+}
+
+.hometile .news ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.hometile .facebookLike {
+border-top: 1px solid #dedede;
+padding: 15px 18px 5px 18px;
+font-size: 11px;
+color: #666;
+background-color: #fafafa;
+margin-top: 10px;
+}
+
+
+.hometile .tweetThis {
+padding: 5px 18px 15px 18px;
+background-color: #fafafa;
+height: 20px;
+}
+
+.hometile .message {
+border-top: 1px solid #dedede;
+padding: 10px 18px 15px 61px;
+font-size: 11px;
+color: #666;
+background: #fafafa url('/assets/plus/seal-mid.png') no-repeat 19px 18px;
+}
+
+.hometile .message p {
+color: #333333;
+font-size: 11px;
+line-height: 16px;
+}
+
+.hometile .message h3 a {
+color: #999999;
+font-size: 11px;
+padding: 0;
+line-height: 16px;
+margin: 8px 0 0 0;
+}
+
+.hometile .message a {
+display: inline-block;
+margin: 3px 0 0 0;
+float: none;
+}
+
+.hometile .message a,
+.hometile .blog a {
+-moz-transition: color 0.15s ease-out;
+-o-transition: color 0.15s ease-out;
+-webkit-transition: color 0.15s ease-out;
+-ms-transition: color 0.15s ease-out;
+transition: color 0.15s ease-out;
+}
+
+.hometile .blog {
+border-top: 1px solid #ededed;
+padding: 13px 18px 13px 61px;
+background: transparent url('/assets/icons/news.png') no-repeat 19px 13px;
+}
+
+.hometile .blog h3 {
+font-weight: normal;
+font-size: 11px;
+line-height: 16px;
+}
+
+.hometile h3 a:hover {
+  color: #008ed3;
+text-decoration: none;
+}
+
+/** User tile **/
+
+.usertile {
+padding: 14px 18px 18px 18px;
+background-color: #fff;
+-moz-transition: box-shadow 0.15s ease-out;
+-o-transition: box-shadow 0.15s ease-out;
+-webkit-transition: box-shadow 0.15s ease-out;
+-ms-transition: box-shadow 0.15s ease-out;
+transition: box-shadow 0.15s ease-out;
+border: 1px solid #dedede;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+width: 200px;
+display: none;
+}
+
+.usertile:hover {
+-moz-box-shadow: 0 1px 2px rgba(0,0,0,.25);
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.25);
+box-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+
+.usertile h4 {
+margin: 0;
+padding: 0 0 10px 0;
+font-size: 16px;
+word-wrap: break-word;
+}
+
+.usertile p {
+font-size: 11px;
+line-height: 14px;
+color: #777;
+padding: 8px 0 0 0;
+}
+
+.tile.source {
+display: none;
+}
+
+/** Home nav **/
+#homeNav {
+position: absolute;
+top: 23px;
+left: 250px;
+display: none;
+}
+
+#homeNav li {
+float: left;
+border-right: 1px solid #d1d1d1;
+margin: 0;
+line-height: 16px;
+}
+
+#homeNav li.last {
+border-right: none;
+}
+
+#homeNav li {
+font-size: 13px;
+text-align: center;
+position: relative;
+color: #red;
+}
+
+#homeNav li span {
+font-size: 11px;
+color: #666666;
+}
+
+#homeNav li a:link {
+display: block;
+padding: 0px 18px 0px 18px;
+-moz-transition: all .15s ease-out;
+-webkit-transition: all .15s ease-out;
+-ms-transition: all .15s ease-out;
+-o-transition: all .15s ease-out;
+transition: all .15s ease-out;
+}
+
+#homeNav li.single a {
+line-height: 37px;
+font-size: 14px;
+padding-bottom: 3px;
+}
+
+#homeNav li.active a span {
+color: #000000;
+}
+
+#homeNav li a:after {
+content: url('/assets/icons/arrow-down.png');
+position: absolute;
+left: 40%;
+top: 11px;
+opacity: 0;
+filter: alpha(opacity=0);
+-moz-transition: all .15s ease-out;
+-webkit-transition: all .15s ease-out;
+-ms-transition: all .15s ease-out;
+-o-transition: all .15s ease-out;
+transition: all .15s ease-out;
+}
+
+#homeNav li a:hover:after {
+opacity: 0.25;
+filter: alpha(opacity=25);
+top: 24px;
+}
+
+#homeNav li.active a:after {
+opacity: 1;
+filter: alpha(opacity=100);
+top: 24px;
+}
+
+#homeNav li a:hover span {
+  color: #008ed3;
+}
+
+.hometile .navigation {
+display: none;
+}
+
+/** Media queries **/
+
+@media screen and (max-width: 770px) {
+#homeNav {
+visibility: hidden;
+display: none;
+border: 1px solid red;
+}
+.hometile .navigation {
+display: block;
+}
+}
+
+@media screen and (max-width: 680px) {
+
+}

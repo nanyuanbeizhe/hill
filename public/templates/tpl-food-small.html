@@ -1,0 +1,40 @@
+<div class="thumbnail food">
+    <a href="#">
+        <img src="<%= images[0].url %>" title="点击加入我的午餐" alt="">
+    </a>
+    <div>
+        <p class="description">
+            <%= description %>
+        </p>
+        <p class="item">
+            <span><%= title %></span>
+            <span class="pull-right">￥<%= price %></span>
+        </p>
+        <div class="shop">                
+            来自<span class="label label-info"><%= shopName %></span>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 点击图片时显示 -->
+<div class="modal" id=<%= _id%> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:none">
+     <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">
+             <span class="detail_title">￥<%= price %> —— <%= title %></span>
+          </h3>
+     </div>
+     <div class="modal-body">
+          <a href="#">
+              <img src="<%= images[0].url %>" title="点击加入我的午餐" alt="">
+          </a>
+          <span></span>
+          <p><span class="detail_desc"><%= description %></span></p>
+     </div>
+     <div class="modal-footer">
+          <span class="detail_lebal">份数:</span>
+          <input id="food_count" type="text" value="1" class="detail_input"/>
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          <button class="btn btn-primary add_shoppingcart">Add to ShopCart</button> 
+     </div>
+</div>

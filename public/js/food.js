@@ -1,0 +1,94 @@
+$(function () {
+	App = window.App || {};
+	App.Model = window.App.Model || {};
+	App.Collection = window.App.Collection || {};
+	App.View =  window.App.View || {};
+
+	/**
+	 * Models
+	 */ 
+	App.Model.Food = Backbone.Model.extend({
+		idAttribute: "_id"
+	});
+
+	/**
+	 * Collection
+	 */
+	App.Collection.FoodCollection = Backbone.Collection.extend({
+		model: App.Model.Food,
+		url: '/food'
+	});
+
+	/**
+	 * Views
+	 */
+	App.View.Food = Backbone.View.extend({
+		tagName: 'li',
+		className: 'span3',
+		templateId: 'tpl-food-small',
+
+		events: {
+			"click .food":                          "showDetail",
+			"click .modal .add_shoppingcart":       "onClick",
+		},
+
+		initialize: function() {
+			this.template = _.template(loadTemplate(this.templateId));
+		},
+
+		render: function() {
+			$(this.el).html(this.template(this.model.toJSON()));
+			return this;
+		},
+
+		showDetail: function() {
+			$('#' + this.model.get("_id")).modal('show');
+		},
+
+		onClick: function() {
+	      var s = '#' + this.model.get('_id') + ' input';
+	      var food = this.model.toJSON();
+	      
+		  var item = new App.Model.ShoppingCartItem({
+		  	id: this.model.get('title'),
+		  	price: this.model.get('price'),
+		  	discount: this.model.get('discount'),
+		  	count: parseInt($(s).val()),
+		  	imageUrl: food.images[0].url,
+		  	shopName: this.model.get('shopName')
+		  });
+
+		  console.log(item.get('count'));
+		  App.shoppingCart.addItem(item);
+	      $('#' + this.model.get("_id")).modal('hide');
+		}
+	});
+
+	App.View.FoodCollection = Backbone.View.extend({
+		templateId: 'tpl-food-list',
+		viewName: 'foodCollection',
+
+		initialize: function() {
+			var html = loadTemplate(this.templateId);
+			this.template = _.template(html);
+		},
+
+		render: function() {
+			var that = this;
+			$(this.el).html(this.template());
+			var container = $(this.el).find('#food');
+
+			this.model.each(function(food){
+				container.append(new App.View.Food({model: food}).render().el);
+			});
+
+			container.imagesLoaded(function(){
+                container.masonry({
+                    itemSelector : '.span3'
+                });
+            });			
+
+			return this;
+		}
+	});
+});
