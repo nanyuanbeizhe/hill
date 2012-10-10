@@ -3,7 +3,7 @@ var Food = require('../models/food.js')
   , cryptUtil = require('../utils/crypt.js')
   , mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/pantry-test');
+mongoose.connect('mongodb://localhost/pantry');
 
 var user = new User;
 user.email = 'xinyuan@36node.com';
