@@ -41,7 +41,7 @@ $(function () {
 			that.model.save(creds, {
 				success: function(model, resp) {
 					that.model = model;
-					App.router.navigate('', true);
+					window.history.back();
 				},
 				error: function(model, resp){
 					var message = resp.getResponseHeader('message');

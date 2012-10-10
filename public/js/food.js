@@ -8,7 +8,8 @@ $(function () {
 	 * Models
 	 */ 
 	App.Model.Food = Backbone.Model.extend({
-		idAttribute: "_id"
+		idAttribute: "_id",
+		urlRoot: '/food'
 	});
 
 	/**
@@ -89,6 +90,35 @@ $(function () {
             });			
 
 			return this;
+		}
+	});
+
+	App.View.FoodEditor = Backbone.View.extend({
+		templateId : 'tpl-food-edit',
+
+		events: {
+			"click #btnSave" 	: 		"save"
+		},
+
+		initialize: function() {
+			this.template = _.template(loadTemplate(this.templateId));
+		},		
+
+		render: function() {
+			$(this.el).html(this.template(this.model.toJSON()));
+			return this;
+		},
+
+		save: function() {
+			var that = this;
+			var creds = $('#food-editor').serializeObject();
+			that.model.save(creds, {
+				success: function(model, resp) {
+					that.model = model;
+					$('#food-editor-message').html('修改成功');
+				}
+			});
+			return false;
 		}
 	});
 });

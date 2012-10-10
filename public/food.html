@@ -22,6 +22,7 @@
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/shoppingCart.js"></script>
     <script type="text/javascript" src="js/food.js"></script>
+    <script type="text/javascript" src="js/session.js"></script>
     
     <!-- app start -->
     <script type="text/javascript">
@@ -29,7 +30,11 @@
         App = window.App || {};
         App.Router = Backbone.Router.extend({
             routes: {
-                ''                      : 'listFood',
+                ''                      : 'food_8',
+                '8set'                  : 'food_8',
+                '10set'                 : 'food_10',
+                '12set'                 : 'food_12',
+                'food'                  : 'listFood'
             },
 
             listFood: function(query) {
@@ -42,15 +47,66 @@
                         alert('food load failed');
                     }
                 });
-            }
+            },
+
+            food_8: function(query) {
+                var food = new App.Model.Food({_id: '504c934b8ba15c710d000003'});
+                food.fetch({
+                    success: function(model, resp){
+                        console.log(model);
+                        new App.View.FoodEditor({model: model, el: $('#panel-editor')}).render();
+                    },
+                    error: function(model, resp){
+                        var message = resp.getResponseHeader('message');
+                        $('#panel-editor').html(message);
+                    }
+                });
+            },
+
+            food_10: function(query) {
+                var food = new App.Model.Food({_id: '504c934b8ba15c710d000005'});
+                food.fetch({
+                    success: function(model, resp){
+                        new App.View.FoodEditor({model: model, el: $('#panel-editor')}).render();
+                    },
+                    error: function(model, resp){
+                        var message = resp.getResponseHeader('message');
+                        $('#panel-editor').html(message);
+                    }
+                });
+            },
+
+            food_12: function(query) {
+                var food = new App.Model.Food({_id: '504c934b8ba15c710d000007'});
+                food.fetch({
+                    success: function(model, resp){
+                        new App.View.FoodEditor({model: model, el: $('#panel-editor')}).render();
+                    },
+                    error: function(model, resp){
+                        var message = resp.getResponseHeader('message');
+                        $('#panel-editor').html(message);
+                    }
+                });
+            }           
         });
 
-        var small = new App.View.ShoppingCartSmall({model: App.shoppingCart, el: $('#nav')}).render();
-        App.shoppingCart.on('all', function(){
-            small.render();
+        var session = App.session = new App.Model.Session({userCookie: true});
+        session.save({auth: false}, {
+            success: function (model, response){
+                if(model.get('email') != 'xinyuan@36node.com'){
+                    new App.View.Login({model: session, el: $('#main')}).render();
+                    session.clear();
+                    return;
+                }
+
+                var router = new App.Router();
+                Backbone.history.start();
+            },
+
+            error: function (model, response){
+                new new App.View.Login({model: session, el: $('#main')}).render();
+            }
         });
-        var router = new App.Router();
-        Backbone.history.start();
     });
     </script>
 </head>
@@ -61,6 +117,16 @@
 </div>
 
 <div class="container" id="main">
+    <div class="span3">
+        <ul class="nav nav-list">
+            <li class="nav-header">鑫缘菜品</li>
+            <li class="active"><a href="#8set">八元套餐</a></li>
+            <li><a href="#10set">十元套餐</a></li>
+            <li><a href="#12set">十二元套餐</a></li>
+        </ul>      
+    </div>
+    <div class="span9" id="panel-editor">
+    </div>
 </div>
 
 </body>
