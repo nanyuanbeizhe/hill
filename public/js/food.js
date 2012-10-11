@@ -116,6 +116,10 @@ $(function () {
 				success: function(model, resp) {
 					that.model = model;
 					$('#food-editor-message').html('修改成功');
+				},
+				error: function(model, resp) {
+					var message = resp.getResponseHeader('message');
+					$('#food-editor-message').html('修改失败: ' + message);
 				}
 			});
 			return false;

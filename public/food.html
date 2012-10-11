@@ -50,6 +50,8 @@
             },
 
             food_8: function(query) {
+                $('ul.nav li').removeClass('active');
+                $('ul.nav li:eq(0)').addClass('active');
                 var food = new App.Model.Food({_id: '504c934b8ba15c710d000003'});
                 food.fetch({
                     success: function(model, resp){
@@ -64,6 +66,8 @@
             },
 
             food_10: function(query) {
+                $('ul.nav li').removeClass('active');
+                $('ul.nav li:eq(1)').addClass('active');
                 var food = new App.Model.Food({_id: '504c934b8ba15c710d000005'});
                 food.fetch({
                     success: function(model, resp){
@@ -77,6 +81,8 @@
             },
 
             food_12: function(query) {
+                $('ul.nav li').removeClass('active');
+                $('ul.nav li:eq(2)').addClass('active');
                 var food = new App.Model.Food({_id: '504c934b8ba15c710d000007'});
                 food.fetch({
                     success: function(model, resp){
@@ -90,23 +96,12 @@
             }           
         });
 
-        var session = App.session = new App.Model.Session({userCookie: true});
-        session.save({auth: false}, {
-            success: function (model, response){
-                if(model.get('email') != 'xinyuan@36node.com'){
-                    new App.View.Login({model: session, el: $('#main')}).render();
-                    session.clear();
-                    return;
-                }
+        var session = App.session = new App.Model.Session({userCookie: true, auth: false});
+        session.save();
+        new App.View.LoginBlock({model: session, el: $('#login-panel')}).render();
 
-                var router = new App.Router();
-                Backbone.history.start();
-            },
-
-            error: function (model, response){
-                new new App.View.Login({model: session, el: $('#main')}).render();
-            }
-        });
+        var router = new App.Router();
+        Backbone.history.start();
     });
     </script>
 </head>
@@ -117,15 +112,19 @@
 </div>
 
 <div class="container" id="main">
-    <div class="span3">
-        <ul class="nav nav-list">
-            <li class="nav-header">鑫缘菜品</li>
-            <li class="active"><a href="#8set">八元套餐</a></li>
-            <li><a href="#10set">十元套餐</a></li>
-            <li><a href="#12set">十二元套餐</a></li>
-        </ul>      
-    </div>
-    <div class="span9" id="panel-editor">
+    <div class="row">
+        <div class="span3">
+            <ul class="nav nav-list">
+                <li class="nav-header">鑫缘菜品</li>
+                <li class="active"><a href="#8set">八元套餐</a></li>
+                <li><a href="#10set">十元套餐</a></li>
+                <li><a href="#12set">十二元套餐</a></li>
+            </ul>
+            <div id="login-panel">
+            </div>      
+        </div>
+        <div class="span9" id="panel-editor">
+        </div>
     </div>
 </div>
 

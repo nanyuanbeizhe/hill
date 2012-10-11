@@ -1,0 +1,22 @@
+<% if(auth){ %>
+<div class="well">
+    <p>欢迎你: <%= userName %></p>
+    <button type="submit" class="btn btn-info btn-small" id="btnLogout">登出</button>
+</div>
+<% }else{ %>
+<div class='login'>
+    <div class="center">
+        <div class="cont clr">
+            <form id="loginForm">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span><input type="text" class="input-medium" placeholder="Email" name="email" id="input-email">
+                </div>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-lock"></i></span><input type="password" class="input-medium" placeholder="Password" name="password" id="input-password">
+                </div>
+                <button type="submit" class="btn btn-info btn-small" id="btnLogin">登录</button>
+            </form>
+        </div>
+    </div>
+</div>
+<% } %>

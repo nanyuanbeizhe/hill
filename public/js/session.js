@@ -44,14 +44,85 @@ $(function () {
 					window.history.back();
 				},
 				error: function(model, resp){
+					that.model.clear({silent:true});
+					that.model.set('auth', false);
 					var message = resp.getResponseHeader('message');
-					console.log(message);
-					$('#loginForm').popover({placement: 'right', title: resp.status, content: message});
-					$('#loginForm').popover('show');
+					if(message.indexOf('password') >= 0){
+						console.log('password error: ' + message);
+						$('#input-password').popover({placement: 'right', title: message});
+						$('#input-password').popover('show');
+					}else{
+						console.log('email error' + message);
+						$('#input-email').popover({placement: 'right', title: message});
+						$('#input-email').popover('show');
+					}
 				}
 			});
 
 			return false;
+		}
+
+	});
+
+	App.View.LoginBlock = Backbone.View.extend({
+		templateId: 'tpl-session-login-small',
+		events: {
+			"click #btnLogin" 	: 		"login",
+			"click #btnLogout" 	: 		"logout"
+		},
+
+		initialize: function() {
+			var that = this;
+			this.template = _.template(loadTemplate(this.templateId));
+			this.model.on('change:auth', function(){
+				that.render();
+			});
+		},
+
+		render: function() {
+			$(this.el).html(this.template(this.model.toJSON()));
+			return this;
+		},
+
+		login: function() {
+			var that = this;
+			var creds = $('#loginForm').serializeObject();
+			that.model.set('userCookie', false);
+			that.model.save(creds, {
+				success: function(model, resp) {
+					that.model = model;
+				},
+				error: function(model, resp){
+					that.model.clear({silent:true});
+					that.model.set('auth', false);
+					var message = resp.getResponseHeader('message');
+					if(message.indexOf('password') >= 0){
+						console.log('password error: ' + message);
+						$('#input-password').popover({placement: 'right', title: message});
+						$('#input-password').popover('show');
+					}else{
+						console.log('email error' + message);
+						$('#input-email').popover({placement: 'right', title: message});
+						$('#input-email').popover('show');
+					}
+				}
+			});
+
+			return false;
+		},
+
+		logout: function() {
+	        var that = this;
+
+	        that.model.destroy({
+	            success: function(model, resp) {
+	                that.model.clear({silent:true});
+	                that.model.set('auth', false);
+	            },
+	            error: function(model, resp) {
+	                console.log('error');
+	            }
+	        });
 		}
 	});
 

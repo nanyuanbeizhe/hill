@@ -102,8 +102,8 @@
 
                     session.destroy({
                         success: function(model, resp) {
+                            session.clear({silent:true});
                             session.set('auth', false);
-                            session.clear();
                             App.router.navigate('', true);
                         },
                         error: function(model, resp) {
