@@ -13,7 +13,7 @@
     <div class="control-group">
         <label class="control-label" for="input-description">详细说明</label>
         <div class="controls">
-            <input type="text" id="input-description" placeholder="描述" name="description" value="<%= description %>">
+            <textarea rows="3" id="input-description" name="description"><%= description %></textarea>
             <span class="help-block">比如套餐包含的菜种类.</span>
         </div>
     </div>
@@ -21,14 +21,14 @@
         <label class="control-label" for="input-price">价格</label>
         <div class="controls">
             <div class="input-prepend">
-                <span class="add-on">￥</span><input type="text" id="input-price" placeholder="菜品名" name="price" value="<%= price %>">
+                <span class="add-on">￥</span><input type="text" class="input-mini" id="input-price" placeholder="菜品名" name="price" value="<%= formatNumber(price, 2, '.', ',') %>">
             </div>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="input-discount">折扣</label>
         <div class="controls">
-            <input type="text" id="input-discount" placeholder="菜品名" name="discount" value="<%= discount %>">
+            <input type="text" id="input-discount" class="input-mini" placeholder="菜品名" name="discount" value="<%= formatNumber(discount, 2, '.', ',') %>">
         </div>
     </div>
     <div class="control-group">

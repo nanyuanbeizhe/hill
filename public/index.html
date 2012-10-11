@@ -200,13 +200,10 @@
             new App.View.ShoppingCartSmall({model: App.shoppingCart, el: $('li#shoppingCart')}).render();
             new App.View.UserPanel({model: session, el: $('li#userPanel')}).render();
             new App.View.OrderMenu({model: session, el: $('li#order-menu')}).render();
+            new App.View.Notice({el: $('#notice-board')}).render();
 
             App.router = new App.Router();
             Backbone.history.start();
-
-/*            session.on('change:auth', function(){
-                router.navigate('', true);
-            });*/
         });
     </script>
 
@@ -237,8 +234,8 @@
     </div>
 </div>
 
-<div class="container" id="main">
-</div>
+<div class="container" id="notice-board"></div>
+<div class="container" id="main"></div>
 
 </body>
 </html>

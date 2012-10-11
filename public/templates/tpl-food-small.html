@@ -30,10 +30,15 @@
           </a>
           <span></span>
           <p><span class="detail_desc"><%= description %></span></p>
+          <div class="shop">                
+            来自<span class="label label-info"><%= shopName %></span>
+        </div>
      </div>
      <div class="modal-footer">
+        <div class="pull-left">
           <span class="detail_lebal">份数:</span>
-          <input id="food_count" type="text" value="1" class="detail_input"/>
+          <input id="food_count" type="text" value="1" class="detail_input input-mini"/>
+        </div>
           <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
           <button class="btn btn-primary add_shoppingcart">Add to ShopCart</button> 
      </div>

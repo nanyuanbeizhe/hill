@@ -51,12 +51,12 @@
 
             food_8: function(query) {
                 $('ul.nav li').removeClass('active');
-                $('ul.nav li:eq(0)').addClass('active');
+                $('ul.nav li:eq(1)').addClass('active');
                 var food = new App.Model.Food({_id: '504c934b8ba15c710d000003'});
                 food.fetch({
                     success: function(model, resp){
-                        console.log(model);
-                        new App.View.FoodEditor({model: model, el: $('#panel-editor')}).render();
+                        food_editor.model = model;
+                        food_editor.render();
                     },
                     error: function(model, resp){
                         var message = resp.getResponseHeader('message');
@@ -67,11 +67,12 @@
 
             food_10: function(query) {
                 $('ul.nav li').removeClass('active');
-                $('ul.nav li:eq(1)').addClass('active');
+                $('ul.nav li:eq(2)').addClass('active');
                 var food = new App.Model.Food({_id: '504c934b8ba15c710d000005'});
                 food.fetch({
                     success: function(model, resp){
-                        new App.View.FoodEditor({model: model, el: $('#panel-editor')}).render();
+                        food_editor.model = model;
+                        food_editor.render();
                     },
                     error: function(model, resp){
                         var message = resp.getResponseHeader('message');
@@ -82,11 +83,12 @@
 
             food_12: function(query) {
                 $('ul.nav li').removeClass('active');
-                $('ul.nav li:eq(2)').addClass('active');
+                $('ul.nav li:eq(3)').addClass('active');
                 var food = new App.Model.Food({_id: '504c934b8ba15c710d000007'});
                 food.fetch({
                     success: function(model, resp){
-                        new App.View.FoodEditor({model: model, el: $('#panel-editor')}).render();
+                        food_editor.model = model;
+                        food_editor.render();
                     },
                     error: function(model, resp){
                         var message = resp.getResponseHeader('message');
@@ -96,6 +98,7 @@
             }           
         });
 
+        var food_editor = new App.View.FoodEditor({el: $('#panel-editor')});
         var session = App.session = new App.Model.Session({userCookie: true, auth: false});
         session.save();
         new App.View.LoginBlock({model: session, el: $('#login-panel')}).render();
@@ -120,7 +123,7 @@
                 <li><a href="#10set">十元套餐</a></li>
                 <li><a href="#12set">十二元套餐</a></li>
             </ul>
-            <div id="login-panel">
+            <div id="login-panel" style="padding-top: 50px">
             </div>      
         </div>
         <div class="span9" id="panel-editor">
