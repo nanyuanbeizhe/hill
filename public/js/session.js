@@ -26,8 +26,8 @@ $(function () {
 
 		events: {
 			"click #btnLogin" 	 : 		"login",
-			"focus #input-email" :      "hideEmailError",
-			"focus #input-password" : 	"hidePasswordError"
+			"keypress #input-email" :      "hideEmailError",
+			"keypress #input-password" : 	"hidePasswordError"
 		},
 
 		initialize: function() {
@@ -56,10 +56,12 @@ $(function () {
 						passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});
 						$('#input-password').popover('show');
+						$('#input-password').focus();
 					}else{
 						emailError = true;
 						$('#input-email').popover({placement: 'right', title: message});
 						$('#input-email').popover('show');
+						$('#input-email').focus();
 					}
 				}
 			});
@@ -84,9 +86,14 @@ $(function () {
 
 	App.View.LoginBlock = Backbone.View.extend({
 		templateId: 'tpl-session-login-small',
+		emailError: false,
+		passwordError: false,
+
 		events: {
 			"click #btnLogin" 	: 		"login",
-			"click #btnLogout" 	: 		"logout"
+			"click #btnLogout" 	: 		"logout",
+			"keypress #input-email" :      "hideEmailError",
+			"keypress #input-password" : 	"hidePasswordError"
 		},
 
 		initialize: function() {
@@ -112,16 +119,18 @@ $(function () {
 				},
 				error: function(model, resp){
 					that.model.clear({silent:true});
-					that.model.set('auth', false);
+					//that.model.set('auth', false);
 					var message = resp.getResponseHeader('message');
 					if(message.indexOf('password') >= 0){
-						console.log('password error: ' + message);
+						passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});
 						$('#input-password').popover('show');
+						$('#input-password').focus();
 					}else{
-						console.log('email error' + message);
+						emailError = true;
 						$('#input-email').popover({placement: 'right', title: message});
 						$('#input-email').popover('show');
+						$('#input-email').focus();
 					}
 				}
 			});
@@ -141,6 +150,20 @@ $(function () {
 	                console.log('error');
 	            }
 	        });
+		},
+
+		hideEmailError: function() {
+			if(emailError) {
+				$('#input-email').popover('destroy');
+				emailError = false;
+			}
+		},
+
+		hidePasswordError: function() {
+			if(passwordError) {
+				$('#input-password').popover('destroy');
+				passwordError = false;
+			}
 		}
 	});
 
