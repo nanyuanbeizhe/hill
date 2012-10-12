@@ -68,7 +68,7 @@ exports.deleteFood = function(req, res) {
 
 exports.updateFood = function(req, res) {
   var id = req.params.id;
-  console.log(new Date().toLocaleString() + "> update food which id is: " + id);
+  console.log(new Date().toLocaleString() + "> comming update food request. food id: " + id);
 
   Food.findById(id, function(err, food){
     if(err) return res.send(500, {message: 'food update error ocurred in db.'});
@@ -85,6 +85,7 @@ exports.updateFood = function(req, res) {
 
     food.save(function (err, food){
       if(err) return res.send(500, {message: 'food update error ocurred in db.'});
+      console.log(new Date().toLocaleString() + "> updated food " + id + " by user " + req.session.user.name + " from " + req.connection.remoteAddress);
       res.send(food);
     });
   });
