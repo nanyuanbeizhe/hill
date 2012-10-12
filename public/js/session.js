@@ -21,8 +21,13 @@ $(function () {
 	 */
 	App.View.Login = Backbone.View.extend({
 		templateId: 'tpl-session-login',
+		emailError: false,
+		passwordError: false,
+
 		events: {
-			"click #btnLogin" 	: 		"login",
+			"click #btnLogin" 	 : 		"login",
+			"focus #input-email" :      "hideEmailError",
+			"focus #input-password" : 	"hidePasswordError"
 		},
 
 		initialize: function() {
@@ -48,11 +53,11 @@ $(function () {
 					that.model.set('auth', false);
 					var message = resp.getResponseHeader('message');
 					if(message.indexOf('password') >= 0){
-						console.log('password error: ' + message);
+						passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});
 						$('#input-password').popover('show');
 					}else{
-						console.log('email error' + message);
+						emailError = true;
 						$('#input-email').popover({placement: 'right', title: message});
 						$('#input-email').popover('show');
 					}
@@ -60,8 +65,21 @@ $(function () {
 			});
 
 			return false;
-		}
+		},
 
+		hideEmailError: function() {
+			if(emailError) {
+				$('#input-email').popover('destroy');
+				emailError = false;
+			}
+		},
+
+		hidePasswordError: function() {
+			if(passwordError) {
+				$('#input-password').popover('destroy');
+				passwordError = false;
+			}
+		}
 	});
 
 	App.View.LoginBlock = Backbone.View.extend({

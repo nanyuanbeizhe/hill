@@ -32,7 +32,7 @@ exports.createSession = function(req, res) {
 
   User.findOne({ 'email': email }, function (err, user) {
     if (err) return res.send(500, {message: 'Error in db while find user: ' + email});
-    if (!user) return res.send(404, {message:'email is not existed'});
+    if (!user) return res.send(404, {message:'invalid email'});
     
     if (!req.body.userCookie && cryptUtil.md5(password) !== user.password)
       return res.send(400, {message:'password error'});

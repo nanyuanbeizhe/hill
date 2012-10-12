@@ -81,6 +81,7 @@ exports.updateFood = function(req, res) {
     if(req.body.images) food.images = req.body.images;
     if(req.body.price) food.price = req.body.price;
     if(req.body.discount) food.discount = req.body.discount;
+    food.lastUpdate = new Date();
 
     food.save(function (err, food){
       if(err) return res.send(500, {message: 'food update error ocurred in db.'});

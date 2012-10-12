@@ -15,6 +15,7 @@ var Food = new Schema({
   , discount    : { type: Number, default: 1.00 }
   , shopName 	: String
   , shopAdmin	: Schema.ObjectId
+  , lastUpdate : Date
 });
 
 module.exports = mongoose.model('Food', Food);
