@@ -53,12 +53,12 @@ $(function () {
 					that.model.set('auth', false);
 					var message = resp.getResponseHeader('message');
 					if(message.indexOf('password') >= 0){
-						passwordError = true;
+						that.passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});
 						$('#input-password').popover('show');
 						$('#input-password').focus();
 					}else{
-						emailError = true;
+						that.emailError = true;
 						$('#input-email').popover({placement: 'right', title: message});
 						$('#input-email').popover('show');
 						$('#input-email').focus();
@@ -70,16 +70,16 @@ $(function () {
 		},
 
 		hideEmailError: function() {
-			if(emailError) {
+			if(this.emailError) {
 				$('#input-email').popover('destroy');
-				emailError = false;
+				this.emailError = false;
 			}
 		},
 
 		hidePasswordError: function() {
-			if(passwordError) {
+			if(this.passwordError) {
 				$('#input-password').popover('destroy');
-				passwordError = false;
+				this.passwordError = false;
 			}
 		}
 	});
@@ -100,6 +100,7 @@ $(function () {
 			var that = this;
 			this.template = _.template(loadTemplate(this.templateId));
 			this.model.on('change:auth', function(){
+				console.log('auth changed' + that.model.get('auth'));
 				that.render();
 			});
 		},
@@ -118,16 +119,15 @@ $(function () {
 					that.model = model;
 				},
 				error: function(model, resp){
-					that.model.clear({silent:true});
-					//that.model.set('auth', false);
+					//that.model.clear({silent:true});
 					var message = resp.getResponseHeader('message');
 					if(message.indexOf('password') >= 0){
-						passwordError = true;
+						that.passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});
 						$('#input-password').popover('show');
 						$('#input-password').focus();
 					}else{
-						emailError = true;
+						that.emailError = true;
 						$('#input-email').popover({placement: 'right', title: message});
 						$('#input-email').popover('show');
 						$('#input-email').focus();
@@ -153,16 +153,16 @@ $(function () {
 		},
 
 		hideEmailError: function() {
-			if(emailError) {
+			if(this.emailError) {
 				$('#input-email').popover('destroy');
-				emailError = false;
+				this.emailError = false;
 			}
 		},
 
 		hidePasswordError: function() {
-			if(passwordError) {
+			if(this.passwordError) {
 				$('#input-password').popover('destroy');
-				passwordError = false;
+				this.passwordError = false;
 			}
 		}
 	});
