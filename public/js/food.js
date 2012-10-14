@@ -17,7 +17,15 @@ $(function () {
 	 */
 	App.Collection.FoodCollection = Backbone.Collection.extend({
 		model: App.Model.Food,
-		url: '/food'
+		url: '/food',
+
+		sortByShop: function() {
+			var sorted = this.sortBy(function (food){
+				return food.get('shopName') + food.get('title');
+			});
+
+			return sorted;
+		}
 	});
 
 	/**
@@ -79,10 +87,11 @@ $(function () {
 			$(this.el).html(this.template());
 			var container = $(this.el).find('#food');
 
-			this.model.each(function(food){
-				container.append(new App.View.Food({model: food}).render().el);
-			});
-
+			var sorted = this.model.sortByShop();
+			for(var i in sorted){
+				container.append(new App.View.Food({model: sorted[i]}).render().el);
+			}
+			
 			container.imagesLoaded(function(){
                 container.masonry({
                     itemSelector : '.span3'
