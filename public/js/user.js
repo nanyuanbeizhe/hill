@@ -113,7 +113,7 @@ $(function () {
 		templateId : 'tpl-user-register',
 
 		events: {
-			"click #btnSave" 	: 		"save"
+			"click #btnRegister" 	: 		"register"
 		},
 
 		initialize: function() {
@@ -125,11 +125,11 @@ $(function () {
 			return this;
 		},
 
-		save: function() {
+		register: function() {
 			var that = this;
 			var creds = $('#user-register').serializeObject();
 
-			var user = new Model.User(creds);
+			var user = new App.Model.User(creds);
 			user.save(creds, {
 				success: function(model, resp) {
 					$('#user-register-message').html('帐号创建成功，请前往邮箱激活。');
