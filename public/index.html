@@ -67,19 +67,20 @@
         App = window.App || {};
         App.Router = Backbone.Router.extend({
             routes: {
-                ''              :   'listFood',
-                'food'          :   'listFood',
-                'editPassword'  :   'editPassword',
-                'editProfile'   :   'editProfile',
-                'findPassword'  :   'findPassword',
-                'register'      :   'register',
-                'login'         :   'login',
-                'logout'        :   'logout',
-                'shoppingCart'  :   'listCart',
-                'generateOrder' :   'generateOrder',
-                'listOrders'    :   'listOrders',
-                'monthReport'   :   'monthReport',
-                'dayReport'     :   'dayReport'
+                ''                      :   'listFood',
+                'food'                  :   'listFood',
+                'editPassword'          :   'editPassword',
+                'editProfile'           :   'editProfile',
+                'findPassword'          :   'findPassword',
+                'register'              :   'register',
+                'login'                 :   'login',
+                'logout'                :   'logout',
+                'shoppingCart'          :   'listCart',
+                'generateOrder'         :   'generateOrder',
+                'listOrders'            :   'listOrders',
+                'monthReport'           :   'monthReport',
+                'dayReport'             :   'dayReport',
+                'active/:key/:email'    :   'activeAccount'
             },
 
             listFood: function(query) {
@@ -223,6 +224,14 @@
                 });
                 
                 orderSelectorPanel.query(); 
+            }, 
+
+            activeAccount: function(key, email) {
+                var url = '/active_account';
+                var data = {key: key, email: email};
+                $.get(url, data, function(result){
+                    new App.View.UserActive({model: {message: result}, el: $('#main')}).render();
+                });
             }
         });
 

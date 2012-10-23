@@ -144,6 +144,19 @@ $(function () {
 		}
 	});
 
+	App.View.UserActive = Backbone.View.extend({
+		templateId : 'tpl-user-active',
+
+		initialize: function() {
+			this.template = _.template(loadTemplate(this.templateId));
+		},		
+
+		render: function() {
+			$(this.el).html(this.template(this.model));
+			return this;
+		}
+	});
+
 	App.View.UserPanel = Backbone.View.extend({
 		templateId: 'tpl-user-panel',
 

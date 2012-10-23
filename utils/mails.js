@@ -24,9 +24,9 @@ var mailOptions_activeAccount = {
 };
 
 // send mail with defined transport object
-exports.activeAccount = function(to, token, callback) {
+exports.activeAccount = function(url, to, token, callback) {
   mailOptions_activeAccount.to = to;
-  var url = 'http://microstrategy.36node.com/active_account?key=' + token + '&email=' + to;
+
   mailOptions_activeAccount.html =  '<p>您好：<p/>' +
     '<p>我们收到您在36node注册信息，请点击下面的链接来激活帐户。</p>' +
     '激活链接： <a href=' + url + '>' + url + '</a>' +

@@ -84,6 +84,7 @@ exports.createUser = function(req, res, next){
     user.active = false;
     user.save(function(err){
       if(err) res.send(500, {message: 'DB in error while save new user!'});
+      var url = req.host + '/#active_account/key=' + token + '/email=' + to;
       mails.activeAccount(email, cryptUtil.md5(email + '7238'),function(success){
         if(!success){
           console.log( 'send email failed: ' + email );
@@ -141,16 +142,16 @@ exports.deleteUser = function(req, res) {
 exports.activeAccount = function(req, res) {
   var key = req.query.key;
   var email = req.query.email;
-  if(cryptUtil.md5(email + '7238') != key) return res.send(400, {message: 'Active key is error.'});
+  if(cryptUtil.md5(email + '7238') != key) return res.send('Active key is error.');
 
   User.findOne({'email':email}, function (err,user){
-    if(!user) return res.send(404, {message: 'user is not existed.'});
-    if(user.active) return res.send(400, {message: 'user is already activated.'});
+    if(!user) return res.send('User not exist.');
+    if(user.active) return res.send('User has already been activated.');
     
     user.active = true;
     user.save(function (err, user){
-      if(err) return res.send(500, {message: 'Error in db while actvating user.'});
-      res.send(wrapUserResultToWeb(user));
+      if(err) return res.send('Error in db while actvating user.');
+      res.send('Thank you ' + user.name + '. Your account has been activated, welcome to 36node.');
     }); 
   });
 };
