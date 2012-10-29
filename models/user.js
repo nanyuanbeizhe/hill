@@ -10,7 +10,7 @@ var UserSchema = new Schema({
   ,	name: { type: String, index: true }
   ,	password: { type: String }
   ,	avatar: { type: String } 
-  ,	roles : [RoleSchema]
+  ,	roles : [String]
   ,	credits: { type: Number, default: 0 }
   ,	emailNotify: { type: Boolean, default: true }
 

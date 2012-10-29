@@ -18,7 +18,7 @@ var mailOptions_activeAccount = {
   // list of receivers
   subject: "Account manager of 36node",
   // Subject line
-  text: "Account manager of 36node!",
+  text: "Microstrategy in 36node",
   // plaintext body
   html: " <b>Account manager of 36node!</b>" // html body
 };
@@ -76,23 +76,11 @@ exports.resetPassword = function(to, password, callback) {
 var mailOptions_dailyReport = {
   from: "36node<36node@gmail.com>",
   // sender address
-  to: "jning@microstrategy.com",
+  to: "jning@microstrategy.com, tiawang@microstrategy.com, manch.09@sem.tsinghua.edu.cn",
   // list of receivers
   subject: "Microstrategy daily report",
   // Subject line
-  text: "Microstrategy daily report",
-  // plaintext body
-  html: " <b>Microstrategy daily report</b>" // html body
-};
-
-var mailOptions_dailyReport_bak = {
-  from: "36node<36node@gmail.com>",
-  // sender address
-  to: "manch.09@sem.tsinghua.edu.cn",
-  // list of receivers
-  subject: "Microstrategy daily report",
-  // Subject line
-  text: "Microstrategy daily report",
+  generateTextFromHTML: true,
   // plaintext body
   html: " <b>Microstrategy daily report</b>" // html body
 };
@@ -113,16 +101,7 @@ exports.sendDailyOrders = function(orders){
     if (error) {
       console.log(error);
     } else {
-      console.log("daily report sent to ningjing: " + response.message);
-    }
-  });
-
-  mailOptions_dailyReport_bak.html = html;
-  smtpTransport.sendMail(mailOptions_dailyReport_bak, function(error, response) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("daily report sent to manchun: " + response.message);
+      console.log("daily report has been sent: " + response.message);
     }
   });
 }

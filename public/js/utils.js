@@ -76,7 +76,7 @@ function formatNumber(number, decimals, dec_point, thousands_sep) {
 
 function roleCheck(roleName, roles){
     for(var i in roles){
-        if(roleName == roles[i].name) return true;
+        if(roleName == roles[i]) return true;
     }
 
     return false;

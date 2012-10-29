@@ -72,6 +72,8 @@ app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
+//temp code
+//TODO: create a schedular module
 var Order = require('./models/order.js')
   , mailUtil = require('./utils/mails.js');
 
@@ -88,6 +90,9 @@ var tt = setInterval(function() {
     end.setMinutes(59);
 
     Order.find({'date': {'$gte': start, '$lte': end}}, function(err,orders){
+      for(var i in orders){
+        orders[i].status = "finished";
+      }
       mailUtil.sendDailyOrders(orders);
     });
   }

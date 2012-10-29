@@ -9,7 +9,7 @@ $(function () {
 	 */ 
 	App.Model.Order = Backbone.Model.extend({
 		idAttribute: "_id",
-		url: '/orders'
+		urlRoot: '/orders'
 	});
 
 	/**
@@ -105,13 +105,17 @@ $(function () {
 		},
 
 		deleteOrder: function() {
-			this.model.destroy({
+			$('span button').addClass('disabled');
+			$('#wait-img').show();
+
+            this.model.destroy({
                 success: function(model, resp) {
+                	alert('Delete order successfully!');
                 },
                 error: function(model, resp) {
-                    console.log('delete order error');
+                	alert(resp.getResponseHeader('message'));
                 }
-			});
+            });
 		}
 	});
 

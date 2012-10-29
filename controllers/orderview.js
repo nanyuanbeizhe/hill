@@ -56,6 +56,7 @@ exports.createOrder = function(req, res) {
   order.date = new Date();
   order.userId = req.session.user._id;
   order.userName = req.session.user.name;
+  order.status = "init";   //init, preparing, sending, finished
 
   order.save(function (err, order){
     if(err) return res.send(500, {message: 'Error in db while save new order.'});
@@ -93,10 +94,12 @@ exports.deleteOrder = function(req, res) {
     if(!order) return res.send(404, {message: 'can not find the order by id: ' + id});
     if(!(req.session.user._id == order.userId) && !(userManager.checkUserRole(req.session.user, 'shopAdmin') && req.session.user._id == order.shopAdmin))
       return res.send(400, {message: 'you are not authenticated to delete order: ' + id});
+    if(order.status != 'init')
+      return res.send(400, {message: 'Your order has already been accepted, you can not delete it anymore.'});
 
     order.remove(function (err, order) {
       if(err) return res.send(500, {message: 'Error in db while update order: ' + id});
-      res.send('success');
+      res.send({success: true});
     });
   });
 };

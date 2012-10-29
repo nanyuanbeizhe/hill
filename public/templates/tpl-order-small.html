@@ -2,8 +2,9 @@
     <div class="alert alert-info">
         <span><strong><%= userName %></strong></span>
         <span><strong> 订单号: </strong> <%= _id %> <strong>饭店: </strong> <%= shopName %></span>
-        <% if(status == '未处理') { %>
+        <% if(status == 'init') { %>
         <span><button type="button" class="btn btn-danger btn-small deleteOrder">删除订单</button></span>
+        <span id="wait-img" style="display:none"><img src="/img/wait.gif"></span>
         <% } %>
         <span class="pull-right"><%= formatDate(new Date(date), true) %></span>
     </div>
