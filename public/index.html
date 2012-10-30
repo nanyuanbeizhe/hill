@@ -46,7 +46,8 @@
                     <li class="divider-vertical"></li>
                 </ul>
                 <form class="navbar-search pull-left">
-                    <input type="text" class="search-query span2" placeholder="comming soon">
+                    <input type="text" class="search-query span3">
+                    <input type="submit" value="Search" id="search-submit">
                 </form>
                 <ul class="nav pull-right">
                     <li id="shoppingCart"></li>
@@ -69,6 +70,7 @@
             routes: {
                 ''                      :   'listFood',
                 'food'                  :   'listFood',
+                'food/:keyword'         :   'listFood',
                 'editPassword'          :   'editPassword',
                 'editProfile'           :   'editProfile',
                 'findPassword'          :   'findPassword',
@@ -83,9 +85,15 @@
                 'active/:key/:email'    :   'activeAccount'
             },
 
-            listFood: function(query) {
+            listFood: function(keyword) {
                 var foodlist = new App.Collection.FoodCollection();
+                var query = {};
+                if(keyword){
+                    query = {q: keyword};
+                }
+
                 foodlist.fetch({
+                    data: query,
                     success: function (collection, response){
                         $('#main').html(new App.View.FoodCollection({model: collection}).render().el);
                     },
@@ -245,6 +253,14 @@
 
         App.router = new App.Router();
         Backbone.history.start();
+
+        //TODO: Temp code
+        $('#search-submit').click(function(event){
+            event.preventDefault();
+            
+            var keyword = $('input.search-query').val();
+            App.router.navigate('#food/' + keyword, true);
+        });
     });
 </script>
 </body>

@@ -38,7 +38,7 @@ $(function () {
 
 		events: {
 			"click .food":                          "showDetail",
-			"click .modal .add_shoppingcart":       "onClick",
+			"click .modal .add_shoppingcart":       "onClick"
 		},
 
 		initialize: function() {

@@ -4,18 +4,19 @@ var Food = require('../models/food.js')
 
 
 exports.loadFoodList = function(req, res){
-  var keyword = req.query.q || ''; // in-site search
-  console.log(new Date().toLocaleString() + "> request food list with query: " + keyword);
-
-  if (Array.isArray(keyword)) {
-    keyword = keyword.join(' ');
-  }
-  keyword = keyword.trim();
-
   var query = {};
+  var keyword = req.query.q; // in-site search
+
   if (keyword) {
+    if (Array.isArray(keyword)) {
+      keyword = keyword.join(' ');
+    }
+    keyword = keyword.trim();
+    console.log(new Date().toLocaleString() + "> request food list with query: " + keyword);
     keyword = keyword.replace(/[\*\^\&\(\)\[\]\+\?\\]/g, '');
-    query.title = new RegExp(keyword, 'i');
+    var k = new RegExp(keyword, 'i');
+    
+    query = {"$or": [{title: k}, {shopName: keyword}]};
   }
 
   Food.find(query, function(err, foodList) {
