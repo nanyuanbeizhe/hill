@@ -77,8 +77,8 @@ $(function () {
 		viewName: 'foodCollection',
 
 		initialize: function() {
-			var html = loadTemplate(this.templateId);
-			this.template = _.template(html);
+			if(this.options.templateId) this.templateId = this.options.templateId;
+			this.template = _.template(loadTemplate(this.templateId));
 		},
 
 		render: function() {

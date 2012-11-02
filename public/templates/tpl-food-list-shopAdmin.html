@@ -1,0 +1,22 @@
+<div class="row">
+    <ul class="thumbnails" id="food" style="margin-left: 0px;">
+    	<% for(var i in food)%>
+    	<li class="span3">
+			<div class="thumbnail food">
+			    <a href="#">
+			        <img src="<%= images[0].url %>" title="点击编辑" alt="">
+			    </a>
+			    <div>
+			        <p class="description">
+			            <%= description %>
+			        </p>
+			        <p class="item">
+			            <span class="label label-info"><%= title %></span>
+			            <span>折扣:<%= discount %></span>
+			            <span class="pull-right">￥<%= price %></span>
+			        </p>
+			    </div>
+			</div>
+		</li>
+    </ul>
+</div>
