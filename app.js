@@ -6,7 +6,7 @@
 var express = require('express')
   , controllers = require('./controllers');
 
-var app = module.exports = express.createServer();
+var app = express();
 
 // Database
 var mongoose = require('mongoose');
@@ -20,6 +20,7 @@ var auth_cookie_name = "auth_token";
 // Configuration
 
 app.configure(function(){
+  app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.bodyParser());
@@ -68,8 +69,19 @@ app.get('/find_password/:email', controllers.resetPassword);
 app.del('/sessions/:id', controllers.deleteSession);
 app.post('/sessions', controllers.createSession);
 
+
+/**
+ * English Classes
+ */
+app.get('/english_class', controllers.english_class);
+app.post('/api/classes', controllers.createClass);
+app.get('/api/classes', controllers.getClasses);
+app.get('/api/classes/:id', controllers.getClass)
+app.put('/api/classes/:id', controllers.updateClass);
+app.del('/api/classes/:id', controllers.deleteClass);
+
 app.listen(3000, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
 
 //temp code

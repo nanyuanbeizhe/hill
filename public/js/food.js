@@ -126,7 +126,7 @@ $(function () {
 					$('#food-editor-message').html('修改成功');
 				},
 				error: function(model, resp) {
-					var message = resp.getResponseHeader('message');
+					var message = eval('(' + resp.responseText + ')').message;
 					$('#food-editor-message').html('修改失败: ' + message);
 				}
 			});

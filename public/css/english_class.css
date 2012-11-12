@@ -1,0 +1,13 @@
+td:hover{
+	background-color:#CCCC00; 
+	cursor: pointer;
+}
+
+.first{
+	background-color: #08C;
+}
+
+.first:hover{
+	background-color: #08C;
+	cursor: default;
+}

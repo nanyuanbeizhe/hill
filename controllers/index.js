@@ -1,7 +1,8 @@
 var foodView = require('./foodview.js')
 	, orderView = require('./orderview.js')
 	, sessionView = require('./sessionview.js')
-	, userView = require('./userview.js');
+	, userView = require('./userview.js')
+	, classView = require('./classview.js');
 
 /*
  * GET home page.
@@ -12,6 +13,10 @@ exports.index = function(req, res){
   res.render('index', {
 	    title     : 'Order'
 	});
+};
+
+exports.english_class = function(req, res) {
+	res.render('english_class', {title: 'English Class'});
 };
 
 // food
@@ -41,3 +46,10 @@ exports.resetPassword = userView.resetPassword;
 exports.createSession = sessionView.createSession;
 exports.deleteSession = sessionView.deleteSession;
 exports.getSession = sessionView.getSession;
+
+// class
+exports.getClasses = classView.getClasses;
+exports.getClass = classView.getClass;
+exports.deleteClass = classView.deleteClass;
+exports.createClass = classView.createClass;
+exports.updateClass = classView.updateClass;

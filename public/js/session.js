@@ -51,7 +51,7 @@ $(function () {
 				error: function(model, resp){
 					that.model.clear({silent:true});
 					that.model.set('auth', false);
-					var message = resp.getResponseHeader('message');
+					var message = eval('(' + resp.responseText + ')').message;
 					if(message.indexOf('password') >= 0){
 						that.passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});
@@ -120,7 +120,7 @@ $(function () {
 				},
 				error: function(model, resp){
 					//that.model.clear({silent:true});
-					var message = resp.getResponseHeader('message');
+					var message = eval('(' + resp.responseText + ')').message;
 					if(message.indexOf('password') >= 0){
 						that.passwordError = true;
 						$('#input-password').popover({placement: 'right', title: message});

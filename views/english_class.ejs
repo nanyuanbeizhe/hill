@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/english_class.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/js/json2.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/underscore.js"></script>
+    <script type="text/javascript" src="/js/backbone.js"></script>
+    <script type="text/javascript" src="/js/session.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/utils.js"></script>
+
+    <!-- app start -->
+    <script type="text/javascript">
+        $(function(){
+            App = window.App || {};
+            App.Model = window.App.Model || {};
+            App.Collection = window.App.Collection || {};
+            App.View =  window.App.View || {};
+            
+            App.Model.Class = Backbone.Model.extend({
+              idAttribute: '_id',
+              urlRoot: '/api/classes'
+            });
+
+            App.Collection.Classes = Backbone.Collection.extend({
+              model: App.Model.Class,
+              url: '/api/classes'
+            });
+
+            var classList = new App.Collection.Classes();
+
+            App.View.MainView = Backbone.View.extend({
+              template: _.template($('#classes-template').html()),
+              events: {
+                "click td":       "joinOrLeaveClass",
+              },
+            
+              joinOrLeaveClass: function(e){
+                if(!session.get('auth')) return false;
+
+                var student = {userId: session.get('userId'), name: session.get('userName')};
+                var id = 0;
+                if(e.target.nodeName == "TD"){
+                    id = $(e.target).attr('id')
+                }else{
+                    id = $(e.target).parent().attr('id');
+                }
+                var glass = this.model.get(id);
+
+                var temp = [];
+                var students = glass.get('students');
+                var isRemove = false;
+                for(var i=0; i < students.length; i++){
+                    if(student.userId == students[i].userId){
+                        isRemove = true;
+                    }else {
+                        temp.push(students[i]);
+                    }
+                }
+                if(isRemove){
+                    glass.set('students', temp);
+                    glass.save();
+                    this.render();
+
+                    return true;  
+                } 
+
+                if(glass.get('students').length >= 4) return false;
+
+                glass.get('students').push(student);
+                glass.save();
+
+                this.render();
+              },
+
+              render:function(){
+                $(this.el).html(this.template());
+
+                this.model.each(function(glass){
+                  var start = new Date(glass.get('start')).getHours() -12;
+                  var end = new Date(glass.get('end')).getHours() - 12;
+                  var weekday = new Date(glass.get('start')).getDay();
+                  var temp = [1000, 1000, 1000, 1000, 0, 1, 1000, 2, 3, 1000, 4, 5];
+                  var classno = temp[start+end];
+
+                  var box = $('tbody tr:eq(' + classno + ') td:eq(' + weekday + ')');
+                  box.attr('id', glass.get('_id'));
+                  glass.get('students').forEach(function(student){
+                    box.append('<span class="badge badge-info">' + student.name + '</span>');
+                  });
+                });
+
+                return this;
+              }
+            });
+
+            var mainView = new App.View.MainView({model: classList, el: $('#main')});
+
+            App.Router = Backbone.Router.extend({
+                routes: {
+                    ''  :   'index'
+                },
+
+                index: function() {
+                    classList.fetch({
+                        data: {start: '2012-11-13', end: '2012-11-17'},
+                        success: function(model, response){
+                            mainView.render();
+                        }
+                    });                   
+                }
+            });
+
+            var session = App.session = new App.Model.Session({userCookie: true, auth: false});
+            session.save();
+            new App.View.LoginBlock({model: session, el: $('#login-panel')}).render();
+
+            var router = new App.Router();
+            Backbone.history.start();
+        });
+    </script>
+  </head>
+
+  <body style="padding-top: 90px;">
+    <div class="container">
+      <h1 class="pull-left">Welcome to Corey's Classroom</h1>
+      <div id="login-panel" class="pull-right"></div>
+      <div id="main"></div>
+    </div>
+  </body>
+
+  <script type="text/template" id="classes-template">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="span2">Section Time</th>
+                <th class="span2 monday">Monday</th>
+                <th class="span2 tuesday">Tuesday</th>
+                <th class="span2 wednesday">Wednesday</th>
+                <th class="span2 thursday">Thursday</th>
+                <th class="span2 friday">Friday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="first">2:00 - 2:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>   
+            <tr>
+                <td class="first">2:30 - 3:00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>   
+            <tr>
+                <td class="first">3:30 - 4:00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>   
+            <tr>
+                <td class="first">4:00 - 4:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="first">5:00 - 5:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="first">5:30 - 6:00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+  </script>
+</html>
