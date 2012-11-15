@@ -109,7 +109,6 @@ $(function () {
                 success: function(model, resp) {
                 },
                 error: function(model, resp) {
-                    console.log('delete order error');
                 }
 			});
 		}
@@ -178,7 +177,6 @@ $(function () {
 			var user = new App.Model.User({_id: userId});
 			user.fetch({
 				success: function(model, resp){
-					console.log(model);
 					$(e.target).popover({placement: 'top', title: 'Email', content: model.get('email')});
 					$(e.target).popover('show');
 				}

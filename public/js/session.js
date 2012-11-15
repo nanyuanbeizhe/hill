@@ -100,7 +100,6 @@ $(function () {
 			var that = this;
 			this.template = _.template(loadTemplate(this.templateId));
 			this.model.on('change:auth', function(){
-				console.log('auth changed' + that.model.get('auth'));
 				that.render();
 			});
 		},
@@ -147,7 +146,6 @@ $(function () {
 	                that.model.set('auth', false);
 	            },
 	            error: function(model, resp) {
-	                console.log('error');
 	            }
 	        });
 		},

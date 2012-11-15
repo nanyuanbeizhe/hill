@@ -67,7 +67,6 @@ $(function () {
 		  	shopName: this.model.get('shopName')
 		  });
 
-		  console.log(item.get('count'));
 		  App.shoppingCart.addItem(item);
 	      $('#' + this.model.get("_id")).modal('hide');
 		}
