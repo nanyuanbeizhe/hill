@@ -84,8 +84,9 @@ exports.createUser = function(req, res, next){
     user.active = false;
     user.save(function(err){
       if(err) res.send(500, {message: 'DB in error while save new user!'});
-      var url = req.host + '/#active_account/key=' + token + '/email=' + to;
-      mails.activeAccount(email, cryptUtil.md5(email + '7238'),function(success){
+      var token = cryptUtil.md5(email + '7238');
+      var url = 'http://microstrategy.36node.com/#active/' + token + '/' + email;
+      mails.activeAccount(url, email ,function(success){
         if(!success){
           console.log( 'send email failed: ' + email );
         }
@@ -142,6 +143,8 @@ exports.deleteUser = function(req, res) {
 exports.activeAccount = function(req, res) {
   var key = req.query.key;
   var email = req.query.email;
+  console.log('Active account: ' + email);
+
   if(cryptUtil.md5(email + '7238') != key) return res.send('Active key is error.');
 
   User.findOne({'email':email}, function (err,user){
@@ -152,6 +155,7 @@ exports.activeAccount = function(req, res) {
     user.save(function (err, user){
       if(err) return res.send('Error in db while actvating user.');
       res.send('Thank you ' + user.name + '. Your account has been activated, welcome to 36node.');
+      console.log('Account has been activated: ' + email);
     }); 
   });
 };
