@@ -45,7 +45,6 @@
                         session.clear();
                     },
                     error: function(model, resp) {
-                        console.log('error');
                     }
                 });
             }
@@ -54,7 +53,6 @@
         var main = $('#main');
         var session = new App.Model.Session();
         session.on('change:auth', function(){
-            console.log('auth: ' + session.get('auth'));
             main.toggle();
             $(message).toggle();
             if(session.get('auth')) $('#welcome').html(session.get('userName'));
