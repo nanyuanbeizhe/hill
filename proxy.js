@@ -10,7 +10,8 @@ httpProxy.createServer({
   hostnameOnly:false,
   router:{
     'microstrategy.36node.com': 'localhost:3000',
-    '211.157.105.122': 'localhost:8080'
+    '211.157.105.122': 'localhost:8080',
+    'mycloud.xicp.net': 'localhost:22'
   }
 }).listen(80, '0.0.0.0');
 
