@@ -67,6 +67,7 @@ exports.updateClass = function(req, res){
 
 		glass.students = req.body.students;
 		glass.open = req.body.open;
+		glass.title = req.body.title;
 
 		glass.save(function(err, glass){
 			if(err) return res.send(500, {message: 'Update class in mongodb with error'});

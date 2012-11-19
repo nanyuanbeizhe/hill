@@ -73,7 +73,7 @@ app.post('/sessions', controllers.createSession);
 /**
  * English Classes
  */
-app.get('/english_class', controllers.english_class);
+app.get('/englishclass', controllers.english_class);
 app.post('/api/classes', controllers.createClass);
 app.get('/api/classes', controllers.getClasses);
 app.get('/api/classes/:id', controllers.getClass)

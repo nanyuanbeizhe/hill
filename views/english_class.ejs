@@ -41,6 +41,7 @@
               template: _.template($('#classes-template').html()),
               events: {
                 "click td":       "joinOrLeaveClass",
+                "click button#btn-save" : "updateClassTitles"
               },
             
               joinOrLeaveClass: function(e){
@@ -81,6 +82,20 @@
                 this.render();
               },
 
+              updateClassTitles : function() {
+                var titles = [$('#monClass').val(), 
+                                $('#tueClass').val(),
+                                $('#wedClass').val(),
+                                $('#thurClass').val(),
+                                $('#friClass').val()];
+
+
+                this.model.each(function(glass){
+                    var weekday = new Date(glass.get('start')).getDay();
+                    glass.save({title: titles[weekday - 1]});
+                });
+              },
+
               render:function(){
                 $(this.el).html(this.template());
 
@@ -94,8 +109,12 @@
                   var box = $('tbody tr:eq(' + classno + ') td:eq(' + weekday + ')');
                   box.attr('id', glass.get('_id'));
                   glass.get('students').forEach(function(student){
-                    box.append('<span class="badge badge-info">' + student.name + '</span>');
+                    box.append('<span class="badge badge-info">' + student.name + '</span><br>');
                   });
+                  if(glass.get('students').length > 1){
+                    box.addClass('open');
+                  }
+                  $('th:eq(' + weekday + ') small').html(glass.get('title'));
                 });
 
                 return this;
@@ -106,16 +125,12 @@
 
             App.Router = Backbone.Router.extend({
                 routes: {
-                    ''  :   'index'
+                    'editClass' :   'editClass'
                 },
 
-                index: function() {
-                    classList.fetch({
-                        data: {start: '2012-11-13', end: '2012-11-17'},
-                        success: function(model, response){
-                            mainView.render();
-                        }
-                    });                   
+                editClass: function() {
+                    router.navigate('');
+                    $('#class-editor').modal('show');
                 }
             });
 
@@ -125,33 +140,71 @@
 
             var router = new App.Router();
             Backbone.history.start();
+
+            classList.fetch({
+                data: {start: '2012-11-20', end: '2012-11-24'},
+                success: function(model, response){
+                    mainView.render();
+                }
+            });  
         });
     </script>
   </head>
 
   <body style="padding-top: 90px;">
     <div class="container">
-      <h1 class="pull-left">Welcome to Corey's Classroom</h1>
-      <div id="login-panel" class="pull-right"></div>
-      <div id="main"></div>
+        <div class="row">
+            <h2 class="span9">Welcome to English Communication Class(1633)</h2>
+            <div id="login-panel" class="span3"></div>
+        </div>
+        <div id="main"></div>
+        <div class="row">
+            <div class="span3"><em>What does the color mean? </em></div>
+            <div class="span3">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Class is open</td>
+                        <td>Class is closed</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span3"><em>Class active & inactive </em></div>
+            <div class="span3">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>4 max</td>
+                        <td>less than 2</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
+
+
+    <footer class="footer">
+      <div class="container">
+        <p>Designed and built with all the love in the world by <a href="https://myhome.microstrategy.com/Person.aspx?guid=B4B6FD09-1DF3-4AA2-85FC-DA1DE77B19AC" target="_blank">Wang, Junhua</a> and <a href="https://myhome.microstrategy.com/Person.aspx?guid=F26AEAC7-E6C7-46A0-8AD0-9704D858A3C1" target="_blank">Corey</a>.</p>
+      </div>
+    </footer>
   </body>
 
   <script type="text/template" id="classes-template">
-    <table class="table table-bordered">
+    <table class="table table-bordered class">
         <thead>
             <tr>
-                <th class="span2">Section Time</th>
-                <th class="span2 monday">Monday</th>
-                <th class="span2 tuesday">Tuesday</th>
-                <th class="span2 wednesday">Wednesday</th>
-                <th class="span2 thursday">Thursday</th>
-                <th class="span2 friday">Friday</th>
+                <th width="80px">Section Time</th>
+                <th class="span2">Monday<br><em><small>England culture<small></em></th>
+                <th class="span2">Tuesday<br><em><small>England culture<small></em></th>
+                <th class="span2">Wednesday<br><em><small>England culture<small></em></th>
+                <th class="span2">Thursday<br><em><small>England culture<small></em></th>
+                <th class="span2">Friday<br><em><small>England culture<small></em></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="first">2:00 - 2:30</td>
+                <td>2:00 - 2:30</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -159,7 +212,7 @@
                 <td></td>
             </tr>   
             <tr>
-                <td class="first">2:30 - 3:00</td>
+                <td>2:30 - 3:00</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -167,7 +220,7 @@
                 <td></td>
             </tr>   
             <tr>
-                <td class="first">3:30 - 4:00</td>
+                <td>3:30 - 4:00</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -175,7 +228,7 @@
                 <td></td>
             </tr>   
             <tr>
-                <td class="first">4:00 - 4:30</td>
+                <td>4:00 - 4:30</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -183,7 +236,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td class="first">5:00 - 5:30</td>
+                <td>5:00 - 5:30</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -191,7 +244,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td class="first">5:30 - 6:00</td>
+                <td>5:30 - 6:00</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -201,5 +254,49 @@
         </tbody>
         <tfoot></tfoot>
     </table>
+    <div class="modal hide fade" id="class-editor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Update Class Titles</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="control-group">
+                <label class="control-label" for="monClass">Monday</label>
+                <div class="controls">
+                  <input type="text" id="monClass" placeholder="Class Title">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="tueClass">Tuesday</label>
+                <div class="controls">
+                  <input type="text" id="tueClass" placeholder="Class Title">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="wedClass">Wednesday</label>
+                <div class="controls">
+                  <input type="text" id="wedClass" placeholder="Class Title">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="thurClass">Thursday</label>
+                <div class="controls">
+                  <input type="text" id="thurClass" placeholder="Class Title">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="friClass">Friday</label>
+                <div class="controls">
+                  <input type="text" id="friClass" placeholder="Class Title">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" id="btn-cancel" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" id="btn-save" data-dismiss="modal" aria-hidden="true">Save changes</button>
+          </div>
+    </div>
   </script>
 </html>

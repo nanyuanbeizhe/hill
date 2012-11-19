@@ -1,13 +1,32 @@
-td:hover{
+.class td:nth-child(n+2):hover{
 	background-color:#CCCC00; 
 	cursor: pointer;
 }
 
-.first{
-	background-color: #08C;
+td:nth-child(1){
+	background-color: #EAF2D3;
 }
 
-.first:hover{
-	background-color: #08C;
-	cursor: default;
+.class td {height:80px}
+
+tr:nth-child(1) th {
+  font-size:1.1em;
+  text-align:middle;
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color:#A7C942;
+  color:#ffffff;
 }
+
+td.open {
+	background-color:#EAF2D3;
+}
+
+.footer {
+padding: 70px 0;
+margin-top: 70px;
+border-top: 1px solid #E5E5E5;
+background-color: whiteSmoke;
+}
+
+th:nth-child(n+2);

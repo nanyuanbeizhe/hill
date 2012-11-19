@@ -2,6 +2,10 @@
 <div class="well">
     <p>欢迎你: <%= userName %></p>
     <button type="submit" class="btn btn-info btn-small" id="btnLogout">登出</button>
+    <% if(userName == 'corey') { %>
+    <a type="button" class="btn btn-info btn-small" href="#editClass">EditClass</a>
+    <a type="button" class="btn btn-info btn-small" href="#report">Report</a>
+    <% } %>
 </div>
 <% }else{ %>
 <div class='login'>

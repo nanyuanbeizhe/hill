@@ -26,4 +26,4 @@ exports.auth_user = function(req,res,next){
         return next();  
       }
     });*/ 
-}
+};
