@@ -6,11 +6,7 @@ mongoose.connect('mongodb://localhost/pantry');
 var start = new Date();
 var end = new Date();
 
-for(var i = 0; i < 10; i++){
-	// 日期+1
-	start.setDate(start.getDate()+1);
-	end.setDate(end.getDate()+1);
-
+for(var i = 0; i < 500; i++){
 	// 跳过周六周日
 	if(start.getDay() == 0 || start.getDay() == 6){
 		continue;
@@ -129,6 +125,10 @@ for(var i = 0; i < 10; i++){
 	glass6.save(function(err){
 		if(err) console.log('save failed:' + start);
 	});
+
+	// 日期+1
+	start.setDate(start.getDate()+1);
+	end.setDate(end.getDate()+1);
 }
 
 console.log('maybe finished, but please wait。。。。');
