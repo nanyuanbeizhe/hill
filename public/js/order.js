@@ -113,7 +113,8 @@ $(function () {
                 	alert('Delete order successfully!');
                 },
                 error: function(model, resp) {
-                	alert(resp.getResponseHeader('message'));
+                	var message = eval('(' + resp.responseText + ')').message;
+                	alert(message);
                 }
             });
 		}

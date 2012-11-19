@@ -24,7 +24,7 @@ var mailOptions_activeAccount = {
 };
 
 // send mail with defined transport object
-exports.activeAccount = function(url, to, token, callback) {
+exports.activeAccount = function(url, to, callback) {
   mailOptions_activeAccount.to = to;
 
   mailOptions_activeAccount.html =  '<p>您好：<p/>' +
