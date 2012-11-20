@@ -104,6 +104,7 @@ var tt = setInterval(function() {
     Order.find({'date': {'$gte': start, '$lte': end}}, function(err,orders){
       for(var i in orders){
         orders[i].status = "finished";
+        orders[i].save();
       }
       mailUtil.sendDailyOrders(orders);
     });

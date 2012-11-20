@@ -169,7 +169,7 @@
                         error: function(model, resp){
                             var message = new App.Model.Message({
                                 type: 'error',
-                                message: order.get('shopName') + ": " + resp.getResponseHeader('message')
+                                message: order.get('shopName') + ": " + eval('(' + resp.responseText + ')').message;
                             });
                             $('#main').prepend(new App.View.Message({model: message}).render().el);
                         }
