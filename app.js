@@ -91,21 +91,25 @@ var Order = require('./models/order.js')
 
 var tt = setInterval(function() {
   var point = new Date();
-  if(point.getHours() == 11 && point.getMinutes() == 10){
-    var start = new Date();
-    var end = new Date();
-    start.setHours(0);
-    start.setMinutes(0);
-    start.setSeconds(0);
-    end.setHours(23);
-    end.setSeconds(59);
-    end.setMinutes(59);
+  var start = new Date();
+  var end = new Date();
+  start.setHours(0);
+  start.setMinutes(0);
+  start.setSeconds(0);
+  end.setHours(23);
+  end.setSeconds(59);
+  end.setMinutes(59);
 
+  if(point.getHours() == 11 && point.getMinutes() == 1){
     Order.find({'date': {'$gte': start, '$lte': end}}, function(err,orders){
       for(var i in orders){
         orders[i].status = "finished";
         orders[i].save();
       }
+    });
+  }
+  if(point.getHours() == 11 && point.getMinutes() == 10){
+    Order.find({'date': {'$gte': start, '$lte': end}}, function(err,orders){
       mailUtil.sendDailyOrders(orders);
     });
   }
