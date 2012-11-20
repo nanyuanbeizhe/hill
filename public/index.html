@@ -169,7 +169,7 @@
                         error: function(model, resp){
                             var message = new App.Model.Message({
                                 type: 'error',
-                                message: order.get('shopName') + ": " + eval('(' + resp.responseText + ')').message;
+                                message: order.get('shopName') + ": " + eval('(' + resp.responseText + ')').message
                             });
                             $('#main').prepend(new App.View.Message({model: message}).render().el);
                         }
@@ -243,7 +243,8 @@
         });
 
         var session = App.session = new App.Model.Session({userCookie: true});
-        session.save({auth: false});
+        session.set('auth', false);
+        session.save();
 
         new App.View.ShoppingCartSmall({model: App.shoppingCart, el: $('li#shoppingCart')}).render();
         new App.View.UserPanel({model: session, el: $('li#userPanel')}).render();
