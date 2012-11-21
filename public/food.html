@@ -99,8 +99,8 @@
         });
 
         var food_editor = new App.View.FoodEditor({el: $('#panel-editor')});
-        var session = App.session = new App.Model.Session({userCookie: true, auth: false});
-        session.save();
+        var session = App.session = new App.Model.Session({auth: false});
+        // session.save();
         new App.View.LoginBlock({model: session, el: $('#login-panel')}).render();
 
         var router = new App.Router();

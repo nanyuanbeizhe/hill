@@ -242,9 +242,9 @@
             }
         });
 
-        var session = App.session = new App.Model.Session({userCookie: true});
-        session.set('auth', false);
-        session.save();
+        var session = App.session = new App.Model.Session({auth: false});
+        //session.set('auth', false);
+        //session.save();
 
         new App.View.ShoppingCartSmall({model: App.shoppingCart, el: $('li#shoppingCart')}).render();
         new App.View.UserPanel({model: session, el: $('li#userPanel')}).render();

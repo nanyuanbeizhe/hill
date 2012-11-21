@@ -134,8 +134,8 @@
                 }
             });
 
-            var session = App.session = new App.Model.Session({userCookie: true, auth: false});
-            session.save();
+            var session = App.session = new App.Model.Session({auth: false});
+            // session.save();
             new App.View.LoginBlock({model: session, el: $('#login-panel')}).render();
 
             var router = new App.Router();
