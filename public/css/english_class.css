@@ -4,7 +4,6 @@ td.glass:hover{
 }
 
 .class td{
-	background-color: #EAF2D3;
   height:80px;
 }
 
@@ -19,6 +18,13 @@ th {
 
 td.open {
 	background-color:#EAF2D3;
+}
+
+td.wait {
+  background-image: url('/img/wait.gif');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #c0ffff;
 }
 
 .footer {

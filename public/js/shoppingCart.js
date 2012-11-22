@@ -123,7 +123,7 @@ $(function () {
      * Views
      */
 
-     App.View.ShoppingCartItem = Backbone.View.extend({
+  App.View.ShoppingCartItem = Backbone.View.extend({
 		tagName: 'tr',
 		templateId: 'tpl-shoppingcart-item',
 
@@ -138,13 +138,7 @@ $(function () {
 		render: function() {
 			$(this.el).html(this.template(this.model.toJSON()));
 			return this;
-		},
-/*
-		onClick: function() {
-			this.trigger('click_food', this.model);
-			$('#' + this.model.get("_id")).modal('show');
 		}
-*/		
 	});
 
 	App.View.ShoppingCart = Backbone.View.extend({

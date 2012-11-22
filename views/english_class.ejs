@@ -45,16 +45,17 @@
               },
             
               joinOrLeaveClass: function(e){
+                var that = this;
                 if(!session.get('auth')) return false;
 
                 var student = {userId: session.get('userId'), name: session.get('userName')};
-                var id = 0;
+                var element;
                 if(e.target.nodeName == "TD"){
-                    id = $(e.target).attr('id')
+                    element = $(e.target);
                 }else{
-                    id = $(e.target).parent().attr('id');
+                    element = $(e.target).parent();
                 }
-                var glass = this.model.get(id);
+                var glass = this.model.get(element.attr('id'));
 
                 if(IsInClass(student, glass)){
                   removeStudent(student, glass);
@@ -63,8 +64,17 @@
                   glass.get('students').push(student);
                 }
 
-                glass.save();
-                this.render();
+                glass.save({}, { 
+                  success: function(model, resp){
+                    that.render();
+                  },
+                  error: function(model, resp){
+                    element.removeClass('wait');
+                    alert('failed: ' + resp.responseText);
+                  }
+                });
+
+                element.addClass('wait');
               },
 
               updateClassTitles : function() {
@@ -85,10 +95,10 @@
                 $(this.el).html(this.template());
 
                 this.model.each(function(glass){
-                  var startTimeString = glass.get('start').replace(/-/g, "/");
-                  var endTimeString = glass.get('end').replace(/-/g, "/");
-                  var start = new Date(startTimeString).getHours() -12;
-                  var end = new Date(endTimeString).getHours() - 12;
+                  var startTimeString = glass.get('start').replace(/-/g, "/").replace('T', " ").split('.')[0];
+                  var endTimeString = glass.get('end').replace(/-/g, "/").replace('T', " ").split('.')[0];
+                  var start = new Date(startTimeString).getHours() - 4;
+                  var end = new Date(endTimeString).getHours() - 4;
                   var weekday = new Date(startTimeString).getDay();
                   var temp = [1000, 1000, 1000, 1000, 0, 1, 1000, 2, 3, 1000, 4, 5];
                   var classno = temp[start+end];
@@ -172,7 +182,7 @@
             <div class="span3">
                 <table class="table table-bordered">
                     <tr>
-                        <td>Class is open</td>
+                        <td class="open">Class is open</td>
                         <td>Class is closed</td>
                     </tr>
                 </table>
@@ -183,7 +193,7 @@
             <div class="span3">
                 <table class="table table-bordered">
                     <tr>
-                        <td>4 max</td>
+                        <td class="open">4 max</td>
                         <td>less than 2</td>
                     </tr>
                 </table>
@@ -213,7 +223,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>2:00 - 2:30</td>
+                <td class="open">2:00 - 2:30</td>
                 <td class="glass"></td>
                 <td class="glass"></td>
                 <td class="glass"></td>
@@ -221,7 +231,7 @@
                 <td class="glass"></td>
             </tr>   
             <tr>
-                <td>2:30 - 3:00</td>
+                <td class="open">2:30 - 3:00</td>
                 <td class="glass"></td>
                 <td class="glass"></td>
                 <td class="glass"></td>
@@ -229,7 +239,7 @@
                 <td class="glass"></td>
             </tr>   
             <tr>
-                <td>3:30 - 4:00</td>
+                <td class="open">3:30 - 4:00</td>
                 <td class="glass"></td>
                 <td class="glass"></td>
                 <td class="glass"></td>
@@ -237,7 +247,7 @@
                 <td class="glass"></td>
             </tr>   
             <tr>
-                <td>4:00 - 4:30</td>
+                <td class="open">4:00 - 4:30</td>
                 <td class="glass"></td>
                 <td class="glass"></td>
                 <td class="glass"></td>
@@ -245,7 +255,7 @@
                 <td class="glass"></td>
             </tr>
             <tr>
-                <td>5:00 - 5:30</td>
+                <td class="open">5:00 - 5:30</td>
                 <td class="glass"></td>
                 <td class="glass"></td>
                 <td class="glass"></td>
@@ -253,7 +263,7 @@
                 <td class="glass"></td>
             </tr>
             <tr>
-                <td>5:30 - 6:00</td>
+                <td class="open">5:30 - 6:00</td>
                 <td class="glass"></td>
                 <td class="glass"></td>
                 <td class="glass"></td>
