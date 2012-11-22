@@ -1,15 +1,14 @@
-.class td:nth-child(n+2):hover{
+td.glass:hover{
 	background-color:#CCCC00; 
 	cursor: pointer;
 }
 
-td:nth-child(1){
+.class td{
 	background-color: #EAF2D3;
+  height:80px;
 }
 
-.class td {height:80px}
-
-tr:nth-child(1) th {
+th {
   font-size:1.1em;
   text-align:middle;
   padding-top:5px;
@@ -28,5 +27,3 @@ margin-top: 70px;
 border-top: 1px solid #E5E5E5;
 background-color: whiteSmoke;
 }
-
-th:nth-child(n+2);
