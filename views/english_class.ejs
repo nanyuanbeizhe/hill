@@ -95,10 +95,11 @@
 
                   var box = $('tbody tr:eq(' + classno + ') td:eq(' + weekday + ')');
                   box.attr('id', glass.get('_id'));
-                  glass.get('students').forEach(function(student){
-                    box.append('<span class="badge badge-info">' + student.name + '</span><br>');
-                  });
-                  if(glass.get('students').length > 1){
+                  var students = glass.get('students');
+                  for(var i in students){
+                    box.append('<span class="badge badge-info">' + students[i].name + '</span><br>');
+                  }
+                  if(students.length > 1){
                     box.addClass('open');
                   }
                   $('th:eq(' + weekday + ') small').html(glass.get('title'));
