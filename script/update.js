@@ -5,10 +5,28 @@ var Food = require('../models/food.js')
 
 mongoose.connect('mongodb://localhost/pantry');
 
-User.findOne({'email':'xinyuan@36node.com'}, function(err, user){
-	if(err) return console.log('can not find user: xinyuan');
+User.findOne({'email':'jning@microstrategy.com'}, function(err, user){
+	if(err) return console.log('can not find user: jning');
+	user.roles.push('shopAdmin');
+	user.save(function(err){
+		if(err) return console.log('error: ' + err);
+		console.log('new role updated.');
+	});
 
-	Food.findById('504c934b8ba15c710d000003', function(err, food){
+	food = new Food;
+	food.description  = '番茄牛肉浓汤 + 米饭 (Tomato beef soup + rice)';
+	food.title        = '番茄牛肉浓汤饭';
+	food.price        = 14.50;
+	food.images.push({url : '/images/c1.jpg', width : 440, height : 500});
+	food.shopName   = '欧乐';
+	food.shopAdmin  = user._id;
+
+	food.save(function(err){
+		if(err) return console.log('error:' + err);
+		console.log('new food created.');
+	});
+
+/*	Food.findById('504c934b8ba15c710d000003', function(err, food){
 		if(err) return console.log(err);
 		food.description = '米饭 酱香大鸡腿 扁豆焖肉 肉末豆腐';
 		food.shopAdmin = user._id;
@@ -49,6 +67,6 @@ User.findOne({'email':'xinyuan@36node.com'}, function(err, user){
 			console.log('rice updated: ');
 			console.log(food);
 		});
-	});
+	});*/
 
 });
