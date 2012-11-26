@@ -65,9 +65,13 @@ exports.updateClass = function(req, res){
 		if(err) return res.send(500, {message: 'Get Class from mongodb with error'});
 		if(!glass) return res.send(404, {message: 'Can not find class with id:' + id});
 
-		glass.students = req.body.students;
-		glass.open = req.body.open;
-		glass.title = req.body.title;
+		if(req.body.students){
+			if(glass.students.length >= 4) return res.send(404, {message: 'This class is full!'});
+			glass.students = req.body.students;
+		}
+
+		if(req.body.open) glass.open = req.body.open;
+		if(req.body.title) glass.title = req.body.title;
 
 		glass.save(function(err, glass){
 			if(err) return res.send(500, {message: 'Update class in mongodb with error'});
