@@ -98,11 +98,15 @@ $(function () {
 		},
 
 		save: function() {
+			$('#btnSave').html('Sending email...');
+			$('#btnSave').addClass('disabled');
 			var that = this;
 			var creds = $('#password-resetor').serializeObject();
 
 			$.get('/find_password/' + creds.email, function (data){
 				$('#password-resetor-message').html('邮件已发送');
+				$('#btnSave').html('Confirm');
+				$('#btnSave').removeClass('disabled');
 			});
 
 			return false;
