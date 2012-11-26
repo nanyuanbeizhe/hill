@@ -66,7 +66,7 @@ exports.updateClass = function(req, res){
 		if(!glass) return res.send(404, {message: 'Can not find class with id:' + id});
 
 		if(req.body.students){
-			if(glass.students.length >= 4) return res.send(404, {message: 'This class is full!'});
+			if(req.body.students > 4) return res.send(404, {message: 'This class is full!'});
 			glass.students = req.body.students;
 		}
 
