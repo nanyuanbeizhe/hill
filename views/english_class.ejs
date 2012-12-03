@@ -51,9 +51,9 @@
                 var student = {userId: session.get('userId'), name: session.get('userName')};
                 var element;
                 if(e.target.nodeName == "TD"){
-                    element = $(e.target);
+                  element = $(e.target);
                 }else{
-                    element = $(e.target).parent();
+                  element = $(e.target).parent();
                 }
                 var glass = this.model.get(element.attr('id'));
 
@@ -140,7 +140,7 @@
             Backbone.history.start();
 
             classList.fetch({
-                data: {start: '2012-11-26', end: '2012-12-01'},
+                data: {start: '2012-12-03', end: '2012-12-08'},
                 success: function(model, response){
                     mainView.render();
                 }
