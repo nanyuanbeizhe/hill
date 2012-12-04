@@ -56,25 +56,26 @@
                   element = $(e.target).parent();
                 }
                 var glass = this.model.get(element.attr('id'));
+                element.addClass('wait');
 
-                if(IsInClass(student, glass)){
-                  removeStudent(student, glass);
-                }else{
-                  if(glass.get('students').length >= 4) return false;
-                  glass.get('students').push(student);
-                }
-
-                glass.save({}, { 
+                glass.save({action: 'joinOrLeaveClass'}, { 
                   success: function(model, resp){
                     that.render();
                   },
                   error: function(model, resp){
                     element.removeClass('wait');
                     alert('failed: ' + resp.responseText);
+                    glass.fetch({
+                      success: function(model, resp){
+                        that.render();
+                      },
+                      error: function(model, resp){
+                        alert('update error, contact system admin!');
+                      }
+                    });
                   }
                 });
 
-                element.addClass('wait');
               },
 
               updateClassTitles : function() {

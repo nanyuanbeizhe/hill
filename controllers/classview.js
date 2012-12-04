@@ -65,9 +65,19 @@ exports.updateClass = function(req, res){
 		if(err) return res.send(500, {message: 'Get Class from mongodb with error'});
 		if(!glass) return res.send(404, {message: 'Can not find class with id:' + id});
 
-		if(req.body.students){
+/*		if(req.body.students){
 			if(req.body.students > 4) return res.send(404, {message: 'This class is full!'});
 			glass.students = req.body.students;
+		}*/
+		if(req.body.action == "joinOrLeaveClass"){
+			if(isInClass(req.session.user._id, glass)){
+				console.log('leave class');
+				removeStudent(req.session.user._id, glass);
+			} else {
+				if(glass.students.length >= 4) return res.send(404, {message: 'This class is full!'});
+				console.log('join class');
+				glass.students.push({userId: req.session.user._id, name: req.session.user.name});
+			}
 		}
 
 		if(req.body.open) glass.open = req.body.open;
@@ -79,3 +89,22 @@ exports.updateClass = function(req, res){
 		});
 	});
 };
+
+function isInClass(userId, glass){
+	var remove = false;
+	glass.students.forEach(function(student){
+    if(student.userId == userId)
+        remove = true;
+	});
+
+  return remove;
+}
+
+function removeStudent(userId, glass){
+  var temp = [];
+  glass.students.forEach(function(student){
+  	if(userId != student.userId) temp.push(student);
+  });
+
+  glass.students = temp;
+}
